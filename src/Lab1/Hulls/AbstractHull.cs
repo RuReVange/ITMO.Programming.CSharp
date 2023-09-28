@@ -1,8 +1,8 @@
-namespace Itmo.ObjectOrientedProgramming.Lab1.Deflectors;
+namespace Itmo.ObjectOrientedProgramming.Lab1.Hulls;
 
-public abstract class AbstractDeflector
+public abstract class AbstractHull
 {
-    protected AbstractDeflector(int quantityAsteroid, int quantityMeteorite)
+    protected AbstractHull(int quantityAsteroid, int quantityMeteorite)
     {
         AsteroidDamage = quantityMeteorite;
         MeteoriteDamage = quantityAsteroid;
@@ -10,9 +10,9 @@ public abstract class AbstractDeflector
         SpaceWhaleDamage = HealthPoint;
     }
 
+    public int SpaceWhaleDamage { get; set; }
     protected int AsteroidDamage { get; init; }
     protected int MeteoriteDamage { get; init; }
-    protected int SpaceWhaleDamage { get; init; }
     protected int HealthPoint { get; set; }
 
     public bool IsAlive()
@@ -21,14 +21,13 @@ public abstract class AbstractDeflector
         return false;
     }
 
-    public void Destruction(AbstractObstacle obstacle) // метод для подсчета урона
+    public void Destruction(AbstractObstacle obstacle)
     {
         if (obstacle != null)
         {
             int tmpQuantity = obstacle.Quantity;
             if (obstacle is Asteroid)
             {
-                // через цикл, потому что нужно отследить момент, когда Health перейдет в 0
                 for (int i = 0; i < tmpQuantity; ++i)
                 {
                     HealthPoint -= AsteroidDamage;
@@ -59,11 +58,4 @@ public abstract class AbstractDeflector
             }
         }
     }
-
-    // public void Destruction(class Obstacle){}
-    //
-    // В классе препятствие храним колличество препятствий
-    // 1 класс на все препятствия
-    // использовать pattern matching (с проверкой на is)
-    // if (obstacle is meteorite)
 }
