@@ -17,45 +17,32 @@ public abstract class AbstractHull
 
     public bool IsAlive()
     {
-        if (HealthPoint > 0) return true;
-        return false;
+        return HealthPoint > 0;
     }
 
-    public void Destruction(AbstractObstacle obstacle)
+    public void TakeDamage(AbstractObstacle? obstacle) // метод для подсчета урона
     {
-        if (obstacle != null)
+        if (obstacle is null) return;
+
+        int damage = SetDamage(obstacle);
+        int tmpQuantity = obstacle.Quantity;
+
+        // через цикл, потому что нужно отследить момент, когда Health перейдет в 0
+        for (int i = 0; i < tmpQuantity; ++i)
         {
-            int tmpQuantity = obstacle.Quantity;
-            if (obstacle is Asteroid)
-            {
-                for (int i = 0; i < tmpQuantity; ++i)
-                {
-                    HealthPoint -= AsteroidDamage;
-                    --obstacle.Quantity;
-                    if (!IsAlive())
-                        return;
-                }
-            }
-            else if (obstacle is Meteorite)
-            {
-                for (int i = 0; i < tmpQuantity; ++i)
-                {
-                    HealthPoint -= MeteoriteDamage;
-                    --obstacle.Quantity;
-                    if (!IsAlive())
-                        return;
-                }
-            }
-            else if (obstacle is SpaceWhale)
-            {
-                for (int i = 0; i < tmpQuantity; ++i)
-                {
-                    HealthPoint -= SpaceWhaleDamage;
-                    --obstacle.Quantity;
-                    if (!IsAlive())
-                        return;
-                }
-            }
+            HealthPoint -= damage;
+            --obstacle.Quantity;
+            if (!IsAlive())
+                return;
         }
+    }
+
+    protected int SetDamage(AbstractObstacle? obstacle)
+    {
+        if (obstacle is Asteroid) return AsteroidDamage;
+        else if (obstacle is Meteorite) return MeteoriteDamage;
+        else if (obstacle is SpaceWhale) return SpaceWhaleDamage;
+
+        return 0;
     }
 }

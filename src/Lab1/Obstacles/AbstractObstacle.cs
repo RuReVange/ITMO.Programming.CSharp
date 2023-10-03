@@ -8,5 +8,7 @@ public abstract record AbstractObstacle
         Quantity = quantity;
     }
 
-    public int Quantity { get; set; }
+    internal int Quantity { get; set; }
+
+    // internal int Damage { get; set; }
 }

@@ -2,14 +2,17 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Deflectors;
 
 public abstract class AbstractDeflector
 {
-    protected AbstractDeflector(int quantityAsteroid, int quantityMeteorite)
+    protected AbstractDeflector(bool photonDeflector, int quantityAsteroid, int quantityMeteorite)
     {
         AsteroidDamage = quantityMeteorite;
         MeteoriteDamage = quantityAsteroid;
         HealthPoint = quantityAsteroid * quantityMeteorite;
         SpaceWhaleDamage = HealthPoint;
+        if (photonDeflector)
+            PhotonDeflector = new PhotonicDeflector();
     }
 
+    internal PhotonicDeflector? PhotonDeflector { get; init; }
     protected int AsteroidDamage { get; init; }
     protected int MeteoriteDamage { get; init; }
     protected int SpaceWhaleDamage { get; init; }
@@ -17,53 +20,38 @@ public abstract class AbstractDeflector
 
     public bool IsAlive()
     {
-        if (HealthPoint > 0) return true;
-        return false;
+        return HealthPoint > 0;
     }
 
-    public void Destruction(AbstractObstacle obstacle) // метод для подсчета урона
+    public void TakeDamage(AbstractObstacle? obstacle) // метод для подсчета урона
     {
-        if (obstacle != null)
+        if (obstacle is null) return;
+        if (obstacle is AntimatterFlares flares)
         {
+            PhotonDeflector?.TakeDamage(flares);
+        }
+        else
+        {
+            int damage = SetDamage(obstacle);
             int tmpQuantity = obstacle.Quantity;
-            if (obstacle is Asteroid)
+
+            // через цикл, потому что нужно отследить момент, когда Health перейдет в 0
+            for (int i = 0; i < tmpQuantity; ++i)
             {
-                // через цикл, потому что нужно отследить момент, когда Health перейдет в 0
-                for (int i = 0; i < tmpQuantity; ++i)
-                {
-                    HealthPoint -= AsteroidDamage;
-                    --obstacle.Quantity;
-                    if (!IsAlive())
-                        return;
-                }
-            }
-            else if (obstacle is Meteorite)
-            {
-                for (int i = 0; i < tmpQuantity; ++i)
-                {
-                    HealthPoint -= MeteoriteDamage;
-                    --obstacle.Quantity;
-                    if (!IsAlive())
-                        return;
-                }
-            }
-            else if (obstacle is SpaceWhale)
-            {
-                for (int i = 0; i < tmpQuantity; ++i)
-                {
-                    HealthPoint -= SpaceWhaleDamage;
-                    --obstacle.Quantity;
-                    if (!IsAlive())
-                        return;
-                }
+                HealthPoint -= damage;
+                --obstacle.Quantity;
+                if (!IsAlive())
+                    return;
             }
         }
     }
 
-    // public void Destruction(class Obstacle){}
-    //
-    // В классе препятствие храним колличество препятствий
-    // 1 класс на все препятствия
-    // использовать pattern matching (с проверкой на is)
-    // if (obstacle is meteorite)
+    protected int SetDamage(AbstractObstacle? obstacle)
+    {
+        if (obstacle is Asteroid) return AsteroidDamage;
+        else if (obstacle is Meteorite) return MeteoriteDamage;
+        else if (obstacle is SpaceWhale) return SpaceWhaleDamage;
+
+        return 0;
+    }
 }

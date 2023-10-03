@@ -5,25 +5,23 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Deflectors;
 public class PhotonicDeflector
 {
     private const int MaxHealth = 3;
-    public PhotonicDeflector()
+    private int HealthPoint { get; set; } = MaxHealth;
+    public void TakeDamage(AntimatterFlares? antimatterFlare) // Attackuation // В параметрах поставить класс Obstacle
     {
-        HealthPoint = MaxHealth;
-    }
+        if (antimatterFlare is null) return;
 
-    protected int HealthPoint { get; set; }
-    public static void Destruction(AntimatterFlares antimatterFlare) // Attackuation // В параметрах поставить класс Obstacle
-    {
-        if (antimatterFlare != null && antimatterFlare.Quantity > MaxHealth)
+        if (antimatterFlare.Quantity > MaxHealth)
         {
             throw new AntimatterFlareException("The ship's crew are dead");
-
-            // return exeption "гибель экипажа"
+        }
+        else
+        {
+            HealthPoint -= antimatterFlare.Quantity;
         }
     }
 
     public bool IsAlive()
     {
-        if (HealthPoint > 0) return true;
-        return false;
+        return HealthPoint > 0;
     }
 }

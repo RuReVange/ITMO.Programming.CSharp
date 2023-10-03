@@ -7,7 +7,7 @@ public abstract class AbstractEngine
     // protected IReadOnlyCollection<int> fuelConsamptionList = new List<int>() { 20, 50 };
     public int Speed { get; init; } = 1;
     public int FuelConsumption { get; init; }
-    public int FuelTank { get; set; }
+    public virtual int FuelTank { get; set; }
 
     public virtual int Movement(int distance)
     {
