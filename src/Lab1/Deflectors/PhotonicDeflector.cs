@@ -1,4 +1,5 @@
-using Itmo.ObjectOrientedProgramming.Lab1.Exceptions;
+using Itmo.ObjectOrientedProgramming.Lab1.Obstacles;
+using Itmo.ObjectOrientedProgramming.Lab1.Outcomes;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Deflectors;
 
@@ -6,18 +7,20 @@ public class PhotonicDeflector
 {
     private const int MaxHealth = 3;
     private int HealthPoint { get; set; } = MaxHealth;
-    public void TakeDamage(AntimatterFlares? antimatterFlare) // Attackuation // В параметрах поставить класс Obstacle
+    public IResult TakeDamage(AntimatterFlares? antimatterFlare) // Attackuation
     {
-        if (antimatterFlare is null) return;
+        if (antimatterFlare is null) return new NullReference();
 
         if (antimatterFlare.Quantity > MaxHealth)
         {
-            throw new AntimatterFlareException("The ship's crew are dead");
+            return new DeadShipsCrew();
         }
         else
         {
             HealthPoint -= antimatterFlare.Quantity;
         }
+
+        return new DefaultResult();
     }
 
     public bool IsAlive()

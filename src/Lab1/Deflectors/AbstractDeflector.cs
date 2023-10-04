@@ -1,3 +1,6 @@
+using Itmo.ObjectOrientedProgramming.Lab1.Obstacles;
+using Itmo.ObjectOrientedProgramming.Lab1.Outcomes;
+
 namespace Itmo.ObjectOrientedProgramming.Lab1.Deflectors;
 
 public abstract class AbstractDeflector
@@ -8,8 +11,7 @@ public abstract class AbstractDeflector
         MeteoriteDamage = quantityAsteroid;
         HealthPoint = quantityAsteroid * quantityMeteorite;
         SpaceWhaleDamage = HealthPoint;
-        if (photonDeflector)
-            PhotonDeflector = new PhotonicDeflector();
+        PhotonDeflector = photonDeflector ? new PhotonicDeflector() : null;
     }
 
     internal PhotonicDeflector? PhotonDeflector { get; init; }
@@ -23,12 +25,16 @@ public abstract class AbstractDeflector
         return HealthPoint > 0;
     }
 
-    public void TakeDamage(AbstractObstacle? obstacle) // метод для подсчета урона
+    public IResult TakeDamage(AbstractObstacle? obstacle) // метод для подсчета урона
     {
-        if (obstacle is null) return;
+        if (obstacle is null) return new NullReference();
+
         if (obstacle is AntimatterFlares flares)
         {
-            PhotonDeflector?.TakeDamage(flares);
+            // #pragma warning disable SK1200
+            return PhotonDeflector is not null ? PhotonDeflector.TakeDamage(flares) : new DeadShipsCrew();
+
+            // #pragma restore disable SK1200
         }
         else
         {
@@ -41,9 +47,11 @@ public abstract class AbstractDeflector
                 HealthPoint -= damage;
                 --obstacle.Quantity;
                 if (!IsAlive())
-                    return;
+                    break;
             }
         }
+
+        return new DefaultResult();
     }
 
     protected int SetDamage(AbstractObstacle? obstacle)

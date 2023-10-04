@@ -1,3 +1,6 @@
+using Itmo.ObjectOrientedProgramming.Lab1.Obstacles;
+using Itmo.ObjectOrientedProgramming.Lab1.Outcomes;
+
 namespace Itmo.ObjectOrientedProgramming.Lab1.Hulls;
 
 public abstract class AbstractHull
@@ -10,7 +13,7 @@ public abstract class AbstractHull
         SpaceWhaleDamage = HealthPoint;
     }
 
-    public int SpaceWhaleDamage { get; set; }
+    protected int SpaceWhaleDamage { get; init; }
     protected int AsteroidDamage { get; init; }
     protected int MeteoriteDamage { get; init; }
     protected int HealthPoint { get; set; }
@@ -20,9 +23,9 @@ public abstract class AbstractHull
         return HealthPoint > 0;
     }
 
-    public void TakeDamage(AbstractObstacle? obstacle) // метод для подсчета урона
+    public IResult TakeDamage(AbstractObstacle? obstacle) // метод для подсчета урона
     {
-        if (obstacle is null) return;
+        if (obstacle is null) return new NullReference();
 
         int damage = SetDamage(obstacle);
         int tmpQuantity = obstacle.Quantity;
@@ -33,8 +36,10 @@ public abstract class AbstractHull
             HealthPoint -= damage;
             --obstacle.Quantity;
             if (!IsAlive())
-                return;
+                break;
         }
+
+        return new DefaultResult();
     }
 
     protected int SetDamage(AbstractObstacle? obstacle)
