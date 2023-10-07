@@ -14,7 +14,7 @@ public abstract class AbstractDeflector
         PhotonDeflector = photonDeflector ? new PhotonicDeflector() : null;
     }
 
-    internal PhotonicDeflector? PhotonDeflector { get; init; }
+    protected PhotonicDeflector? PhotonDeflector { get; init; }
     protected int AsteroidDamage { get; init; }
     protected int MeteoriteDamage { get; init; }
     protected int SpaceWhaleDamage { get; init; }
@@ -44,17 +44,17 @@ public abstract class AbstractDeflector
             // через цикл, потому что нужно отследить момент, когда Health перейдет в 0
             for (int i = 0; i < tmpQuantity; ++i)
             {
+                if (!IsAlive())
+                    return new DeflectorDestruction();
                 HealthPoint -= damage;
                 --obstacle.Quantity;
-                if (!IsAlive())
-                    break;
             }
         }
 
-        return new DefaultResult();
+        return new DefaultSuccess();
     }
 
-    protected int SetDamage(AbstractObstacle? obstacle)
+    private int SetDamage(AbstractObstacle? obstacle)
     {
         if (obstacle is Asteroid) return AsteroidDamage;
         else if (obstacle is Meteorite) return MeteoriteDamage;

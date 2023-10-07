@@ -25,7 +25,13 @@ public abstract class AbstractHull
 
     public IResult TakeDamage(AbstractObstacle? obstacle) // метод для подсчета урона
     {
-        if (obstacle is null) return new NullReference();
+        switch (obstacle)
+        {
+            case null:
+                return new NullReference();
+            case AntimatterFlares:
+                return obstacle.Quantity > 0 ? new DeadShipsCrew() : new DefaultSuccess();
+        }
 
         int damage = SetDamage(obstacle);
         int tmpQuantity = obstacle.Quantity;
@@ -33,16 +39,16 @@ public abstract class AbstractHull
         // через цикл, потому что нужно отследить момент, когда Health перейдет в 0
         for (int i = 0; i < tmpQuantity; ++i)
         {
+            if (!IsAlive())
+                return new ShipDestruction();
             HealthPoint -= damage;
             --obstacle.Quantity;
-            if (!IsAlive())
-                break;
         }
 
-        return new DefaultResult();
+        return new DefaultSuccess();
     }
 
-    protected int SetDamage(AbstractObstacle? obstacle)
+    private int SetDamage(AbstractObstacle? obstacle)
     {
         if (obstacle is Asteroid) return AsteroidDamage;
         else if (obstacle is Meteorite) return MeteoriteDamage;

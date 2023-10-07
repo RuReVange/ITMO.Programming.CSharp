@@ -9,6 +9,7 @@ public class Meridian : AbstractSpaceship
     public Meridian(bool isPhotonicDeflector)
     {
         ImpulseEngine = new ImpulseEngineE();
+        JumpEngine = null;
         Deflector = new TypeSecondDeflector(isPhotonicDeflector);
         Hull = new TypeSecondHull();
         AntiNeutrinoEmitter = true;

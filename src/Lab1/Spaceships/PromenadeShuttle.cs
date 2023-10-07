@@ -8,6 +8,8 @@ public class PromenadeShuttle : AbstractSpaceship
     public PromenadeShuttle()
     {
         ImpulseEngine = new ImpulseEngineC();
+        JumpEngine = null;
+        Deflector = null;
         Hull = new TypeFirstHull();
         AntiNeutrinoEmitter = false;
     }
