@@ -13,7 +13,7 @@ public class IncreasedDensityNebula : IEnvironment
           ObstacleList = new List<AbstractObstacle>() { new AntimatterFlares(antimatterFlares) };
      }
 
-     public IEnumerable<AbstractObstacle> ObstacleList { get; init; }
+     public IEnumerable<AbstractObstacle> ObstacleList { get; set; }
 
      public IResult EnvironmentMovement(int distance, AbstractSpaceship spaceship)
      {
@@ -25,17 +25,14 @@ public class IncreasedDensityNebula : IEnvironment
                     return new DeadShipsCrew();
           }
 
-          IEnumerator<AbstractObstacle> enumerator = ObstacleList.GetEnumerator();
-          enumerator.Reset();
           if (spaceship.Hull is not null)
           {
-               if (ObstacleList.Any(i => enumerator.Current.Quantity > 0 && spaceship.Hull.TakeDamage(i) is DeadShipsCrew))
+               if (ObstacleList.Any(i => spaceship.Hull.TakeDamage(i) is DeadShipsCrew))
                     return new DeadShipsCrew();
           }
           else
           {
-               if (enumerator.Current.Quantity > 0)
-                    return new ShipDestruction();
+               return new ShipDestruction();
           }
 
           return spaceship.JumpEngine.Movement(distance);

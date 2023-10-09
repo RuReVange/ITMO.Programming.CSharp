@@ -20,21 +20,15 @@ public abstract class AbstractDeflector
     protected int SpaceWhaleDamage { get; init; }
     protected int HealthPoint { get; set; }
 
-    public bool IsAlive()
-    {
-        return HealthPoint > 0;
-    }
-
     public IResult TakeDamage(AbstractObstacle? obstacle) // метод для подсчета урона
     {
         if (obstacle is null) return new NullReference();
 
         if (obstacle is AntimatterFlares flares)
         {
-            // #pragma warning disable SK1200
-            return PhotonDeflector is not null ? PhotonDeflector.TakeDamage(flares) : new DeadShipsCrew();
-
-            // #pragma restore disable SK1200
+            return obstacle.Quantity > 0
+                ? (PhotonDeflector is not null ? PhotonDeflector.TakeDamage(flares) : new DeadShipsCrew())
+                : new DefaultSuccess();
         }
         else
         {
@@ -52,6 +46,11 @@ public abstract class AbstractDeflector
         }
 
         return new DefaultSuccess();
+    }
+
+    private bool IsAlive()
+    {
+        return HealthPoint > 0;
     }
 
     private int SetDamage(AbstractObstacle? obstacle)

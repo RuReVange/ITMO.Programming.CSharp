@@ -18,12 +18,13 @@ public class PhotonicDeflector
         else
         {
             HealthPoint -= antimatterFlare.Quantity;
+            antimatterFlare.Quantity = 0;
         }
 
         return new DefaultSuccess();
     }
 
-    public bool IsAlive()
+    private bool IsAlive()
     {
         return HealthPoint > 0;
     }

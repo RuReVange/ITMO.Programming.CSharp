@@ -6,6 +6,6 @@ public abstract class AbstractJumpEngine : AbstractEngine
     {
         Speed = 50;
         FuelConsumption = 20;
-        FuelTank = 2400;
+        FuelTank = 500;
     }
 }

@@ -13,7 +13,7 @@ public class OrdinarySpace : IEnvironment
         ObstacleList = new List<AbstractObstacle>() { new Asteroid(qtyAsteroid), new Meteorite(qtyMeteorite) };
     }
 
-    public IEnumerable<AbstractObstacle> ObstacleList { get; init; }
+    public IEnumerable<AbstractObstacle> ObstacleList { get; set; }
 
     public IResult EnvironmentMovement(int distance, AbstractSpaceship spaceship)
     {

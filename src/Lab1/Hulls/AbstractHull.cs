@@ -17,12 +17,6 @@ public abstract class AbstractHull
     protected int AsteroidDamage { get; init; }
     protected int MeteoriteDamage { get; init; }
     protected int HealthPoint { get; set; }
-
-    public bool IsAlive()
-    {
-        return HealthPoint > 0;
-    }
-
     public IResult TakeDamage(AbstractObstacle? obstacle) // метод для подсчета урона
     {
         switch (obstacle)
@@ -45,7 +39,15 @@ public abstract class AbstractHull
             --obstacle.Quantity;
         }
 
+        if (HealthPoint == 0)
+            return new ShipDestruction();
+
         return new DefaultSuccess();
+    }
+
+    private bool IsAlive()
+    {
+        return HealthPoint > 0;
     }
 
     private int SetDamage(AbstractObstacle? obstacle)

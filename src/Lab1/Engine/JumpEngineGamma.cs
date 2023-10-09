@@ -6,6 +6,7 @@ public class JumpEngineGamma : AbstractJumpEngine
         : base()
     {
         FuelConsumption *= FuelConsumption;
+        FuelTank *= 100;
 
         // consumption n^2
     }

@@ -8,6 +8,7 @@ public class JumpEngineOmega : AbstractJumpEngine
         : base()
     {
         FuelConsumption *= (int)Math.Round(Math.Log(FuelConsumption));
+        FuelTank *= 10;
 
         // consumption nlogn
     }
