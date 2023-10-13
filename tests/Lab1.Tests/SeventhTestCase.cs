@@ -17,7 +17,7 @@ public class SeventhTestCase
         var spaceshipList = new List<AbstractSpaceship>() { new Vaclas(false), new Augur(false), new Meridian(false) };
         var path = new GlobalPath(pathList, spaceshipList);
 
-        var resultList = new List<(AbstractSpaceship Ship, IResult Result)>(path.GlobalMovement());
+        var resultList = new List<GlobalPathResult>(path.GlobalMovement());
 
         Assert.True(resultList[0].Result is ShipDestruction && resultList[1].Result is RouteSuccess && resultList[2].Result is ShipDestruction);
         Assert.True(resultList[3].Result is ShipDestruction && resultList[4].Result is ShipDestruction && resultList[5].Result is ShipDestruction);

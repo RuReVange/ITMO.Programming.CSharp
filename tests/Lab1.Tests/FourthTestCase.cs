@@ -17,8 +17,8 @@ public class FourthTestCase
         var spaceshipList = new List<AbstractSpaceship>() { new PromenadeShuttle(), new Vaclas(false) };
         var path = new GlobalPath(pathList, spaceshipList);
 
-        var resultList = new List<(AbstractSpaceship Ship, IResult Result)>(path.GlobalMovement());
+        var resultList = new List<GlobalPathResult>(path.GlobalMovement());
 
-        Assert.True(resultList[0].Result.SpentFuel < resultList[1].Result.SpentFuel && resultList[0].Ship is PromenadeShuttle && resultList[1].Ship is Vaclas);
+        Assert.True(resultList[0].Result.SpentFuel < resultList[1].Result.SpentFuel && resultList[0].Spaceship is PromenadeShuttle && resultList[1].Spaceship is Vaclas);
     }
 }

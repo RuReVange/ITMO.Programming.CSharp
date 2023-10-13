@@ -1,6 +1,6 @@
 namespace Itmo.ObjectOrientedProgramming.Lab1.Outcomes;
 
-public class RouteSuccess : IResult
+public record RouteSuccess : IResult
 {
     public RouteSuccess(int spentTime, int spentFuel)
     {

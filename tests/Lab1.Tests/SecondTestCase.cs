@@ -21,10 +21,10 @@ public class SecondTestCase
     private void SecondTestCaseMethod(IList<(IEnvironment Environment, int Distance)> pathList, IList<AbstractSpaceship> spaceshipList)
     {
         var path = new GlobalPath(pathList, spaceshipList);
-        IList<(AbstractSpaceship, IResult)> results;
+        IList<GlobalPathResult> results;
 
         results = path.GlobalMovement();
 
-        Assert.True(results[0].Item2 is DeadShipsCrew && results[1].Item2 is RouteSuccess);
+        Assert.True(results[0].Result is DeadShipsCrew && results[1].Result is RouteSuccess);
     }
 }

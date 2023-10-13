@@ -14,12 +14,11 @@ public class GlobalPath
         SpaceshipList = spaceshipList;
     }
 
-    private IList<(IEnvironment Environment, int Distance)> PathList { get; set; } // маршрут
-    private IList<AbstractSpaceship> SpaceshipList { get; init; } // список кораблей
-
-    public IList<(AbstractSpaceship Ship, IResult Result)> GlobalMovement()
+    public IList<AbstractSpaceship> SpaceshipList { get; init; } // список кораблей
+    public IList<(IEnvironment Environment, int Distance)> PathList { get; init; } // маршрут
+    public IList<GlobalPathResult> GlobalMovement()
     {
-        IList<(AbstractSpaceship, IResult)> results = new List<(AbstractSpaceship, IResult)>();
+        IList<GlobalPathResult> results = new List<GlobalPathResult>();
 
         for (int i = 0; i < PathList.Count; ++i)
         {
@@ -39,11 +38,11 @@ public class GlobalPath
                     ++k;
                 }
 
-                // моя логика была заточена под идею, что при столкновении препятствия с кораблям, в случае выживания корабля, препятствие уничтожается
+                // моя логика была заточена под идею, что при столкновении препятствия с кораблем, в случае выживания корабля, препятствие уничтожается
                 // но судя по тесткейсам корабли не существуют в одной и той же среде, а перемещаются в неких "параллельных однотипных средах"
                 //  а значит каждый корабль должен встретить одинаковое исходное кол-во препятствий
                 // именно по этой причине, у меня создается буферный список препятствий tmpObstacleQtyList, который хранит исходное кол-во препятствий для каждого нового корабля
-                results.Add((SpaceshipList[j], PathList[i].Environment.EnvironmentMovement(PathList[i].Distance, SpaceshipList[j])));
+                results.Add(new GlobalPathResult(SpaceshipList[j], PathList[i].Environment.EnvironmentMovement(PathList[i].Distance, SpaceshipList[j])));
             }
         }
 

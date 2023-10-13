@@ -20,10 +20,10 @@ public class FirstTestCase
     private void FirstTestCaseMethod(IList<(IEnvironment Environment, int Distance)> pathList, IList<AbstractSpaceship> spaceshipList)
     {
         var path = new GlobalPath(pathList, spaceshipList);
-        IList<(AbstractSpaceship, IResult)> results;
+        IList<GlobalPathResult> results;
 
         results = path.GlobalMovement();
 
-        Assert.True(results[0].Item2 is ShipLoss && results[1].Item2 is ShipLoss);
+        Assert.True(results[0].Result is ShipLoss && results[1].Result is ShipLoss);
     }
 }

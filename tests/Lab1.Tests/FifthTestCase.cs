@@ -17,7 +17,7 @@ public class FifthTestCase
         var spaceshipList = new List<AbstractSpaceship>() { new Augur(false), new Stella(false) };
         var path = new GlobalPath(pathList, spaceshipList);
 
-        var resultList = new List<(AbstractSpaceship Ship, IResult Result)>(path.GlobalMovement());
+        var resultList = new List<GlobalPathResult>(path.GlobalMovement());
 
         Assert.True(resultList[0].Result is ShipLoss && resultList[1].Result is RouteSuccess);
     }
