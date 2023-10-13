@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Itmo.ObjectOrientedProgramming.Lab1.Environments;
-using Itmo.ObjectOrientedProgramming.Lab1.Outcomes;
 using Itmo.ObjectOrientedProgramming.Lab1.Path;
+using Itmo.ObjectOrientedProgramming.Lab1.Result;
 using Itmo.ObjectOrientedProgramming.Lab1.Spaceships;
 using Xunit;
 

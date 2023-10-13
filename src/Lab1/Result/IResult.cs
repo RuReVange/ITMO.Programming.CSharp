@@ -1,4 +1,4 @@
-namespace Itmo.ObjectOrientedProgramming.Lab1.Outcomes;
+namespace Itmo.ObjectOrientedProgramming.Lab1.Result;
 
 public interface IResult
 {

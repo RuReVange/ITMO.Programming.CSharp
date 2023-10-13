@@ -1,4 +1,4 @@
-using Itmo.ObjectOrientedProgramming.Lab1.Outcomes;
+using Itmo.ObjectOrientedProgramming.Lab1.Result;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Engine;
 
