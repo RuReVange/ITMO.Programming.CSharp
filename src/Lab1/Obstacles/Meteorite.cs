@@ -1,6 +1,6 @@
 namespace Itmo.ObjectOrientedProgramming.Lab1.Obstacles;
 
-public record Meteorite : AbstractObstacle
+public record Meteorite : AbstractPhysicalObstacle
 {
     public Meteorite(int quantity)
         : base(quantity) { }

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Itmo.ObjectOrientedProgramming.Lab1.Environments;
+using Itmo.ObjectOrientedProgramming.Lab1.Obstacles;
 using Itmo.ObjectOrientedProgramming.Lab1.Path;
 using Itmo.ObjectOrientedProgramming.Lab1.Result;
 using Itmo.ObjectOrientedProgramming.Lab1.Spaceships;
@@ -7,13 +8,14 @@ using Xunit;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Tests;
 
-public class FourthTestCase
+public class PromenadeShuttleVaclasInOrdinarySpaceShortLengthRoute
 {
     [Fact]
-    public void FourthTestCaseMethod()
+    public void TestMethod()
     {
         int distance = 100;
-        var pathList = new List<(IEnvironment Environment, int Distance)>() { (new OrdinarySpace(0, 0), distance) };
+        IList<AbstractObstacle> obstacleList = new List<AbstractObstacle>() { new Asteroid(0), new Meteorite(0) };
+        var pathList = new List<(IEnvironment Environment, int Distance)>() { (new OrdinarySpace(obstacleList), distance) };
         var spaceshipList = new List<AbstractSpaceship>() { new PromenadeShuttle(), new Vaclas(false) };
         var path = new GlobalPath(pathList, spaceshipList);
 

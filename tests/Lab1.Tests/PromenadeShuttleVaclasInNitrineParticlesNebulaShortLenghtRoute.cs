@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Itmo.ObjectOrientedProgramming.Lab1.Environments;
+using Itmo.ObjectOrientedProgramming.Lab1.Obstacles;
 using Itmo.ObjectOrientedProgramming.Lab1.Path;
 using Itmo.ObjectOrientedProgramming.Lab1.Result;
 using Itmo.ObjectOrientedProgramming.Lab1.Spaceships;
@@ -7,13 +8,14 @@ using Xunit;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Tests;
 
-public class SixthTestCase
+public class PromenadeShuttleVaclasInNitrineParticlesNebulaShortLenghtRoute
 {
     [Fact]
-    public void SixthTestCaseMethod()
+    public void TestMethod()
     {
-        int distance = 100;
-        var pathList = new List<(IEnvironment Environment, int Distance)>() { (new NitrineParticlesNebula(1), distance) };
+        const int distance = 100;
+        IList<AbstractObstacle> obstacleList = new List<AbstractObstacle>() { new SpaceWhale(1) };
+        var pathList = new List<(IEnvironment Environment, int Distance)>() { (new NitrineParticlesNebula(obstacleList), distance) };
         var spaceshipList = new List<AbstractSpaceship>() { new PromenadeShuttle(), new Vaclas(false) };
         var path = new GlobalPath(pathList, spaceshipList);
 

@@ -8,12 +8,12 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Environments;
 
 public class IncreasedDensityNebula : IEnvironment
 {
-     public IncreasedDensityNebula(int antimatterFlares = 0)
+     public IncreasedDensityNebula(IList<AbstractObstacle> obstacleList)
      {
-          ObstacleList = new List<AbstractObstacle>() { new AntimatterFlares(antimatterFlares) };
+          ObstacleList = obstacleList;
      }
 
-     public IEnumerable<AbstractObstacle> ObstacleList { get; set; }
+     public IList<AbstractObstacle> ObstacleList { get; init; }
 
      public IResult EnvironmentMovement(int distance, AbstractSpaceship spaceship)
      {

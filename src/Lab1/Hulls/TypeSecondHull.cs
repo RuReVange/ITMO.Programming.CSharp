@@ -2,6 +2,8 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Hulls;
 
 public class TypeSecondHull : AbstractHull
 {
-    public TypeSecondHull(int quantityAsteroid = 5, int quantityMeteor = 2)
+    private const int PosssibleQtyAsteroidForHull = 5;
+    private const int PosssibleQtyMeteoriteForHull = 2;
+    public TypeSecondHull(int quantityAsteroid = PosssibleQtyAsteroidForHull, int quantityMeteor = PosssibleQtyMeteoriteForHull)
         : base(quantityAsteroid, quantityMeteor) { }
 }

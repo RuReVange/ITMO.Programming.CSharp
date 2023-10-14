@@ -9,12 +9,12 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Environments;
 
 public class NitrineParticlesNebula : IEnvironment
 {
-    public NitrineParticlesNebula(int qtySpaceWhale = 0)
+    public NitrineParticlesNebula(IList<AbstractObstacle> obstacleList)
     {
-        ObstacleList = new List<AbstractObstacle>() { new SpaceWhale(qtySpaceWhale) };
+        ObstacleList = obstacleList;
     }
 
-    public IEnumerable<AbstractObstacle> ObstacleList { get; set; }
+    public IList<AbstractObstacle> ObstacleList { get; init; }
 
     public IResult EnvironmentMovement(int distance, AbstractSpaceship spaceship)
     {

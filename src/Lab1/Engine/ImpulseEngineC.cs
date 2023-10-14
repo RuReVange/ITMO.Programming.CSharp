@@ -4,11 +4,14 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Engine;
 
 public class ImpulseEngineC : AbstractImpulseEngine
 {
+    private const int StandardSpeed = 50;
+    private const int StandardConsumption = 20;
+    private const int StandardFuelTank = 510;
     public ImpulseEngineC()
     {
-        Speed = 50;
-        FuelConsumption = 20;
-        FuelTank = 510;
+        Speed = StandardSpeed;
+        FuelConsumption = StandardConsumption;
+        FuelTank = StandardFuelTank;
     }
 
     public override IResult Movement(int distance)

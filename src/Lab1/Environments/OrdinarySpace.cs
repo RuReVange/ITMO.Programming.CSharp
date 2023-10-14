@@ -8,12 +8,12 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Environments;
 
 public class OrdinarySpace : IEnvironment
 {
-    public OrdinarySpace(int qtyAsteroid = 0, int qtyMeteorite = 0)
+    public OrdinarySpace(IList<AbstractObstacle> obstacleList)
     {
-        ObstacleList = new List<AbstractObstacle>() { new Asteroid(qtyAsteroid), new Meteorite(qtyMeteorite) };
+        ObstacleList = obstacleList;
     }
 
-    public IEnumerable<AbstractObstacle> ObstacleList { get; set; }
+    public IList<AbstractObstacle> ObstacleList { get; init; }
 
     public IResult EnvironmentMovement(int distance, AbstractSpaceship spaceship)
     {

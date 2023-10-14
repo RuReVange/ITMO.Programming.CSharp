@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Itmo.ObjectOrientedProgramming.Lab1.Environments;
+using Itmo.ObjectOrientedProgramming.Lab1.Obstacles;
 using Itmo.ObjectOrientedProgramming.Lab1.Path;
 using Itmo.ObjectOrientedProgramming.Lab1.Result;
 using Itmo.ObjectOrientedProgramming.Lab1.Spaceships;
@@ -7,18 +8,18 @@ using Xunit;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Tests;
 
-public class SecondTestCase
+public class VaclasAndPhotonicVaclasInIncreasedDensityNebulaWithAntimatterFlares
 {
     // #pragma warning disable CA1024
-    public static IEnumerable<object[]> DataSecondTestCase()
+    public static IEnumerable<object[]> TestData()
     {
-        yield return new object[] { new List<(IEnvironment, int)> { (new IncreasedDensityNebula(2), 100) }, new List<AbstractSpaceship>() { new Vaclas(false), new Vaclas(true) } };
+        yield return new object[] { new List<(IEnvironment, int)> { (new IncreasedDensityNebula(new List<AbstractObstacle>() { new AntimatterFlares(2) }), 100) }, new List<AbstractSpaceship>() { new Vaclas(false), new Vaclas(true) } };
     }
 
     // #pragma warning restore CA1024
     [Theory]
-    [MemberData(nameof(DataSecondTestCase))]
-    private void SecondTestCaseMethod(IList<(IEnvironment Environment, int Distance)> pathList, IList<AbstractSpaceship> spaceshipList)
+    [MemberData(nameof(TestData))]
+    private void TestMethod(IList<(IEnvironment Environment, int Distance)> pathList, IList<AbstractSpaceship> spaceshipList)
     {
         var path = new GlobalPath(pathList, spaceshipList);
         IList<GlobalPathResult> results;

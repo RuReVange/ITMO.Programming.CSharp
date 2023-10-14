@@ -7,6 +7,6 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Environments;
 
 public interface IEnvironment
 {
-    public IEnumerable<AbstractObstacle> ObstacleList { get; set; }
+    public IList<AbstractObstacle> ObstacleList { get; init; }
     internal IResult EnvironmentMovement(int distance, AbstractSpaceship spaceship);
 }

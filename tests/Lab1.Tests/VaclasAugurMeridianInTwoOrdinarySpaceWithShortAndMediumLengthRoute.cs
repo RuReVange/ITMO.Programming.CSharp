@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Itmo.ObjectOrientedProgramming.Lab1.Environments;
+using Itmo.ObjectOrientedProgramming.Lab1.Obstacles;
 using Itmo.ObjectOrientedProgramming.Lab1.Path;
 using Itmo.ObjectOrientedProgramming.Lab1.Result;
 using Itmo.ObjectOrientedProgramming.Lab1.Spaceships;
@@ -7,13 +8,16 @@ using Xunit;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Tests;
 
-public class SeventhTestCase
+public class VaclasAugurMeridianInTwoOrdinarySpaceWithShortAndMediumLengthRoute
 {
     [Fact]
-    public void SeventhTestCaseMethod()
+    public void TestMethod()
     {
         (int, int) distance = (100, 1000);
-        var pathList = new List<(IEnvironment Environment, int Distance)>() { (new OrdinarySpace(15, 2), distance.Item1), (new OrdinarySpace(0, 10), distance.Item2) };
+        IList<AbstractObstacle> obstacleListFirst = new List<AbstractObstacle>() { new Asteroid(15), new Meteorite(2) };
+        IList<AbstractObstacle> obstacleListSecond = new List<AbstractObstacle>() { new Asteroid(0), new Meteorite(10) };
+
+        var pathList = new List<(IEnvironment Environment, int Distance)>() { (new OrdinarySpace(obstacleListFirst), distance.Item1), (new OrdinarySpace(obstacleListSecond), distance.Item2) };
         var spaceshipList = new List<AbstractSpaceship>() { new Vaclas(false), new Augur(false), new Meridian(false) };
         var path = new GlobalPath(pathList, spaceshipList);
 
