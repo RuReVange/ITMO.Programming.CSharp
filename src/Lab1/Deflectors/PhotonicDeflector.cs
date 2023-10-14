@@ -6,7 +6,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Deflectors;
 public class PhotonicDeflector
 {
     private const int MaxHealth = 3;
-    private int HealthPoint { get; set; } = MaxHealth;
+    protected int HealthPoint { get; set; } = MaxHealth;
     public IResult TakeDamage(AntimatterFlares? antimatterFlare) // Attackuation
     {
         if (antimatterFlare is null) return new NullReference();
