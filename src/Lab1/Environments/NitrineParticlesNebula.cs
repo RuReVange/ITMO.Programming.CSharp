@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using Itmo.ObjectOrientedProgramming.Lab1.Engine;
 using Itmo.ObjectOrientedProgramming.Lab1.Obstacles;
 using Itmo.ObjectOrientedProgramming.Lab1.Result;
@@ -18,32 +17,15 @@ public class NitrineParticlesNebula : IEnvironment
 
     public IResult EnvironmentMovement(int distance, AbstractSpaceship spaceship)
     {
-        if (spaceship.ImpulseEngine is null) return new ShipLoss();
         if (spaceship.ImpulseEngine is ImpulseEngineC) distance *= 3;
 
         if (spaceship.AntiNeutrinoEmitter)
         {
-            return spaceship.ImpulseEngine.Movement(distance);
+            foreach (AbstractObstacle obstacle in ObstacleList)
+                obstacle.Quantity = 0;
         }
-        else
-        {
-            if (spaceship.Deflector is not null)
-            {
-                foreach (AbstractObstacle i in ObstacleList)
-                    spaceship.Deflector.TakeDamage(i);
-            }
 
-            if (spaceship.Hull is not null)
-            {
-                if (ObstacleList.Any(i => spaceship.Hull.TakeDamage(i) is ShipDestruction))
-                    return new ShipDestruction();
-            }
-            else
-            {
-                return new ShipDestruction();
-            }
-
-            return spaceship.ImpulseEngine.Movement(distance);
-        }
+        IResult tmpResult = spaceship.SpaceshipTakeDamage(ObstacleList);
+        return tmpResult is DefaultSuccess ? (spaceship.ImpulseEngine is not null ? spaceship.ImpulseEngine.Movement(distance) : new ShipLoss()) : tmpResult;
     }
 }

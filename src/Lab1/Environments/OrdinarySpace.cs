@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using Itmo.ObjectOrientedProgramming.Lab1.Obstacles;
 using Itmo.ObjectOrientedProgramming.Lab1.Result;
 using Itmo.ObjectOrientedProgramming.Lab1.Spaceships;
@@ -17,24 +16,7 @@ public class OrdinarySpace : IEnvironment
 
     public IResult EnvironmentMovement(int distance, AbstractSpaceship spaceship)
     {
-        if (spaceship.ImpulseEngine is null) return new ShipLoss();
-
-        if (spaceship.Deflector is not null)
-        {
-            foreach (AbstractObstacle i in ObstacleList)
-                spaceship.Deflector.TakeDamage(i);
-        }
-
-        if (spaceship.Hull is not null)
-        {
-            if (ObstacleList.Any(i => spaceship.Hull.TakeDamage(i) is ShipDestruction))
-                return new ShipDestruction();
-        }
-        else
-        {
-            return new ShipDestruction();
-        }
-
-        return spaceship.ImpulseEngine.Movement(distance);
+        IResult tmpResult = spaceship.SpaceshipTakeDamage(ObstacleList);
+        return tmpResult is DefaultSuccess ? (spaceship.ImpulseEngine is not null ? spaceship.ImpulseEngine.Movement(distance) : new ShipLoss()) : tmpResult;
     }
 }
