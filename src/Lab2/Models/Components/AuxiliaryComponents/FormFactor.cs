@@ -1,4 +1,4 @@
-namespace Itmo.ObjectOrientedProgramming.Lab2.Models;
+namespace Itmo.ObjectOrientedProgramming.Lab2.Models.Components.AuxiliaryComponents;
 
 public class FormFactor
 {

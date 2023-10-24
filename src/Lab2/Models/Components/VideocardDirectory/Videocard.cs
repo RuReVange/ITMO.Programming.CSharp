@@ -1,6 +1,8 @@
-namespace Itmo.ObjectOrientedProgramming.Lab2.Models.Components;
+using Itmo.ObjectOrientedProgramming.Lab2.Models.Components.AuxiliaryComponents;
 
-public class Videocard
+namespace Itmo.ObjectOrientedProgramming.Lab2.Models.Components.VideocardDirectory;
+
+public class Videocard : IVideocard
 {
     public Videocard(FormFactor? formFactor, int videoCardMemorySize, int pcieVersion, int gpuFrequency, int powerConsumption)
     {
@@ -13,7 +15,7 @@ public class Videocard
 
     public FormFactor? FormFactor { get; init; }
     public int VideoCardMemorySize { get; init; }
-    public int PcieVersion { get; init; }
+    public int PcieVersion { get; init; } // 1.0, 2.0, 3.0 и 4.0
     public int GpuFrequency { get; init; }
     public int PowerConsumption { get; init; }
 }
