@@ -2,14 +2,14 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.Models.Components.AuxiliaryCompone
 
 public class FormFactor
 {
-    public FormFactor(int length = default, int width = default, int height = default)
+    public FormFactor(int length = default, int height = default, int width = default)
     {
         Length = length;
-        Width = width;
         Height = height;
+        Width = width;
     }
 
     public int Length { get; init; }
-    public int Width { get; init; }
     public int Height { get; init; }
+    public int Width { get; init; }
 }

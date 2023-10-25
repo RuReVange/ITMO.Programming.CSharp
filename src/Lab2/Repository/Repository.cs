@@ -370,7 +370,7 @@ public class Repository
                 .WithFormFactor(new FormFactor(6, 34, 150))
                 .WithDdrStandard("DDR4")
                 .WithPowerConsumption(1.45)
-                .WithSupportedXmpProfile(null)
+                .WithSupportedXmpProfile(XmpList[2])
                 .Build());
         RamList.Add(
             _ramBuilder.WithMemorySize(8)
@@ -378,7 +378,7 @@ public class Repository
                 .WithFormFactor(new FormFactor(6, 30, 150))
                 .WithDdrStandard("DDR3")
                 .WithPowerConsumption(1.1)
-                .WithSupportedXmpProfile(null)
+                .WithSupportedXmpProfile(XmpList[2])
                 .Build());
     }
 

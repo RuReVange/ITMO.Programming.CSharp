@@ -11,7 +11,6 @@ public interface IRamBuilder
     IRamBuilder WithFormFactor(FormFactor? formFactor);
     IRamBuilder WithDdrStandard(string? ddrStandard);
     IRamBuilder WithPowerConsumption(double powerConsumption);
-
     void DeBuild(IRam ram);
     IRam Build();
 }
