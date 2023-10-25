@@ -2,7 +2,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.Models.Components.WiFiAdapterDirec
 
 public class WiFiAdapter : IWiFiAdapter
 {
-    public WiFiAdapter(int wiFiStandardVersion, bool isBluetoothModule, int pcieVersion, int powerConsumption)
+    public WiFiAdapter(string? wiFiStandardVersion, bool isBluetoothModule, int pcieVersion, int powerConsumption)
     {
         WiFiStandardVersion = wiFiStandardVersion;
         IsBluetoothModule = isBluetoothModule;
@@ -10,7 +10,7 @@ public class WiFiAdapter : IWiFiAdapter
         PowerConsumption = powerConsumption;
     }
 
-    public int WiFiStandardVersion { get; init; }
+    public string? WiFiStandardVersion { get; init; }
     public bool IsBluetoothModule { get; init; }
     public int PcieVersion { get; init; } // 1.0, 2.0, 3.0 и 4.0
     public int PowerConsumption { get; init; } // ватт

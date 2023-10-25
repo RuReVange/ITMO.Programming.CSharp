@@ -2,7 +2,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.Models.Components.WiFiAdapterDirec
 
 public interface IWiFiAdapterBuilder
 {
-    IWiFiAdapterBuilder WithWiFiStandardVersion(int wiFiStandardVersion);
+    IWiFiAdapterBuilder WithWiFiStandardVersion(string? wiFiStandardVersion);
     IWiFiAdapterBuilder WithIsBluetoothModule(bool isBluetoothModule);
     IWiFiAdapterBuilder WithPcieVersion(int pcieVersion);
     IWiFiAdapterBuilder WithPowerConsumption(int powerConsumption);

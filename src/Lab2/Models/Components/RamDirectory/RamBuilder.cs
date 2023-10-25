@@ -7,7 +7,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.Models.Components.RamDirectory;
 public class RamBuilder : IRamBuilder
 {
     private IList<RamMemoryFrequencyAndVoltage> _memoryFrequencyList;
-    private IList<Xmp> _supportedXmpFrofileList;
+    private Xmp? _supportedXmpFrofile;
     private int _memorySize;
     private FormFactor? _formFactor;
     private string? _ddrStandard;
@@ -16,7 +16,6 @@ public class RamBuilder : IRamBuilder
     public RamBuilder()
     {
         _memoryFrequencyList = new List<RamMemoryFrequencyAndVoltage>();
-        _supportedXmpFrofileList = new List<Xmp>();
     }
 
     public IRamBuilder WithMemorySize(int memorySize)
@@ -35,13 +34,9 @@ public class RamBuilder : IRamBuilder
         return this;
     }
 
-    public IRamBuilder WithSupportedXmpProfileList(IList<Xmp> supportedXmpProfileList)
+    public IRamBuilder WithSupportedXmpProfile(Xmp? supportedXmpProfile)
     {
-        foreach (Xmp supportedXmpProfile in supportedXmpProfileList)
-        {
-            _supportedXmpFrofileList.Add(supportedXmpProfile);
-        }
-
+        _supportedXmpFrofile = supportedXmpProfile;
         return this;
     }
 
@@ -67,7 +62,7 @@ public class RamBuilder : IRamBuilder
     {
         _memorySize = ram.MemorySize;
         _memoryFrequencyList = new List<RamMemoryFrequencyAndVoltage>(ram.MemoryFrequencyList ?? throw new InvalidOperationException());
-        _supportedXmpFrofileList = new List<Xmp>(ram.SupportedXmpProfileList ?? throw new InvalidOperationException());
+        _supportedXmpFrofile = ram.SupportedXmpProfile;
         _formFactor = ram.FormFactor;
         _ddrStandard = ram.DdrStandard;
         _powerConsumption = ram.PowerConsumption;
@@ -78,7 +73,7 @@ public class RamBuilder : IRamBuilder
         return new Ram(
             _memorySize,
             _memoryFrequencyList,
-            _supportedXmpFrofileList,
+            _supportedXmpFrofile,
             _formFactor,
             _ddrStandard,
             _powerConsumption);

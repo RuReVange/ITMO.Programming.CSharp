@@ -7,7 +7,7 @@ public interface IRamBuilder
 {
     IRamBuilder WithMemorySize(int memorySize);
     IRamBuilder WithMemoryFrequencyList(IList<RamMemoryFrequencyAndVoltage> memoryFrequencyList);
-    IRamBuilder WithSupportedXmpProfileList(IList<Xmp> supportedXmpProfileList);
+    IRamBuilder WithSupportedXmpProfile(Xmp? supportedXmpProfile);
     IRamBuilder WithFormFactor(FormFactor? formFactor);
     IRamBuilder WithDdrStandard(string? ddrStandard);
     IRamBuilder WithPowerConsumption(double powerConsumption);
