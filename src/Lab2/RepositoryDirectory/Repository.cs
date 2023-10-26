@@ -12,7 +12,7 @@ using Itmo.ObjectOrientedProgramming.Lab2.Models.Components.VideocardDirectory;
 using Itmo.ObjectOrientedProgramming.Lab2.Models.Components.WiFiAdapterDirectory;
 using Itmo.ObjectOrientedProgramming.Lab2.Models.PersonalComputer;
 
-namespace Itmo.ObjectOrientedProgramming.Lab2.Repository;
+namespace Itmo.ObjectOrientedProgramming.Lab2.RepositoryDirectory;
 
 public class Repository
 {
@@ -54,13 +54,14 @@ public class Repository
     public IList<IPcCase> PcCaseList { get; init; } = new List<IPcCase>();
     public IList<IPowerSupplyUnit> PowerSupplyUnitList { get; init; } = new List<IPowerSupplyUnit>();
     public IList<IWiFiAdapter> WiFiAdapterList { get; init; } = new List<IWiFiAdapter>();
-    public IList<Bios> BiosList { get; init; } = new List<Bios>()
+
+    private IList<Bios> BiosList { get; init; } = new List<Bios>()
     {
         new Bios("UEFI", "7D32VHE", new List<string>() { "LGA 1700" }),
         new Bios("UEFI", "7C95V251", new List<string>() { "AM4" }),
         new Bios("ACI", "7E68V113", new List<string>() { "LGA 1200" }),
     };
-    public IList<Xmp> XmpList { get; init; } = new List<Xmp>()
+    private IList<Xmp> XmpList { get; init; } = new List<Xmp>()
     {
         new Xmp("16-20-20", 1.35, 3200),
         new Xmp("16-18-18", 1.25, 3200),
@@ -195,7 +196,7 @@ public class Repository
                 .Build());
         CpuCoolerList.Add(
             _cpuCoolerBuilder.WithSupportedSocketsList(new List<string>() { "AM4", "AM5", "LGA 1150", "LGA 1151", "LGA 1155", "LGA 1151-v2", "LGA 1156", "LGA 1200", "LGA 1700" })
-                .WithMaxTdp(130)
+                .WithMaxTdp(120)
                 .WithFormFactor(new FormFactor(121, 136, 76))
                 .Build());
         CpuCoolerList.Add(
@@ -339,10 +340,10 @@ public class Repository
     private void PowerSupplyUnitInitializer()
     {
         PowerSupplyUnitList.Add(
-        _powerSupplyUnitBuilder.WithPeakPower(600)
+        _powerSupplyUnitBuilder.WithPeakPower(400)
             .Build());
         PowerSupplyUnitList.Add(
-            _powerSupplyUnitBuilder.WithPeakPower(700)
+            _powerSupplyUnitBuilder.WithPeakPower(600)
                 .Build());
         PowerSupplyUnitList.Add(
             _powerSupplyUnitBuilder.WithPeakPower(800)

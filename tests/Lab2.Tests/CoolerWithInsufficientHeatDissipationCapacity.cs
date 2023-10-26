@@ -6,7 +6,7 @@ using Xunit;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Tests;
 
-public class SuccessfulComputerAssemblyWithExactlyCompatibleComponents
+public class CoolerWithInsufficientHeatDissipationCapacity
 {
     [Fact]
     public void TestMethod()
@@ -18,7 +18,7 @@ public class SuccessfulComputerAssemblyWithExactlyCompatibleComponents
         personalComputerBuilder
             .WithMotherboard(repository.MotherboardsList[0])
             .WithCpu(repository.CpuList[2])
-            .WithCpuCooler(repository.CpuCoolerList[0])
+            .WithCpuCooler(repository.CpuCoolerList[2])
             .WithRam(repository.RamList[1])
             .WithVideocard(repository.VideocardList[1])
             .WithSsd(repository.SsdList[1])
@@ -31,6 +31,6 @@ public class SuccessfulComputerAssemblyWithExactlyCompatibleComponents
 
         Result result = Validator.Validate(personalComputer);
 
-        Assert.True(result.FinalResult is "Successful build");
+        Assert.True(result.FinalResult is "Warranty obligations are denied. Some components may be unstable");
     }
 }

@@ -146,20 +146,18 @@ public static class Validator
                 personalComputer.Hdd?.PowerConsumption +
                 personalComputer.WiFiAdapter?.PowerConsumption;
 
-            if ((int?)powerConsumptionSum - personalComputer.PowerSupplyUnit.PeakPower > 100)
+            switch ((int?)powerConsumptionSum - personalComputer.PowerSupplyUnit.PeakPower)
             {
-                result.Unsuccess();
-                return result;
-            }
-
-            if ((int?)powerConsumptionSum - personalComputer.PowerSupplyUnit.PeakPower > 0)
-            {
-                result.BuildWithoutWarranty();
-                result.IsPowerSupplyUnitInstalled = true;
-            }
-            else
-            {
-                result.IsPowerSupplyUnitInstalled = true;
+                case > 100:
+                    result.Unsuccess();
+                    return result;
+                case > 0:
+                    result.BuildWithoutWarranty();
+                    result.IsPowerSupplyUnitInstalled = true;
+                    break;
+                default:
+                    result.IsPowerSupplyUnitInstalled = true;
+                    break;
             }
         }
         else

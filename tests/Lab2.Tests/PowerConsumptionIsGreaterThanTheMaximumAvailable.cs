@@ -6,7 +6,7 @@ using Xunit;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Tests;
 
-public class SuccessfulComputerAssemblyWithExactlyCompatibleComponents
+public class PowerConsumptionIsGreaterThanTheMaximumAvailable
 {
     [Fact]
     public void TestMethod()
@@ -25,12 +25,12 @@ public class SuccessfulComputerAssemblyWithExactlyCompatibleComponents
             .WithHdd(repository.HddList[0])
             .WithPcCase(repository.PcCaseList[1])
             .WithWiFiAdapter(repository.WiFiAdapterList[0])
-            .WithPowerSupplyUnit(repository.PowerSupplyUnitList[2]);
+            .WithPowerSupplyUnit(repository.PowerSupplyUnitList[0]);
 
         IPersonalComputer personalComputer = personalComputerBuilder.Build();
 
         Result result = Validator.Validate(personalComputer);
 
-        Assert.True(result.FinalResult is "Successful build");
+        Assert.True(result.FinalResult is "Warranty obligations are denied. Some components may be unstable");
     }
 }

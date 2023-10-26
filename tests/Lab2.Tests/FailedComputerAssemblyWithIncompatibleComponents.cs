@@ -6,7 +6,7 @@ using Xunit;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Tests;
 
-public class SuccessfulComputerAssemblyWithExactlyCompatibleComponents
+public class FailedComputerAssemblyWithIncompatibleComponents
 {
     [Fact]
     public void TestMethod()
@@ -17,7 +17,7 @@ public class SuccessfulComputerAssemblyWithExactlyCompatibleComponents
         IPersonalComputerBuilder personalComputerBuilder = new PersonalComputerBuilder();
         personalComputerBuilder
             .WithMotherboard(repository.MotherboardsList[0])
-            .WithCpu(repository.CpuList[2])
+            .WithCpu(repository.CpuList[1])
             .WithCpuCooler(repository.CpuCoolerList[0])
             .WithRam(repository.RamList[1])
             .WithVideocard(repository.VideocardList[1])
@@ -31,6 +31,6 @@ public class SuccessfulComputerAssemblyWithExactlyCompatibleComponents
 
         Result result = Validator.Validate(personalComputer);
 
-        Assert.True(result.FinalResult is "Successful build");
+        Assert.True(result.FinalResult is "Invalid build. The components are incompatible");
     }
 }
