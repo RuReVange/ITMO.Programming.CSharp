@@ -47,12 +47,6 @@ public static class Validator
                 result.Unsuccess();
                 return result;
             }
-            else if (personalComputer.Motherboard?.Chipset?.SuportedMemoryFrequencyList?[0] >
-                     personalComputer.Ram?.MemoryFrequencyList?[0].MemoryFrequency)
-            {
-                result.Unsuccess();
-                return result;
-            }
             else if (personalComputer.Ram?.SupportedXmpProfile is not null)
             {
                 if (personalComputer.Motherboard?.Chipset?.XmpSupport == false)
@@ -78,6 +72,12 @@ public static class Validator
                         return result;
                     }
                 }
+            }
+            else if (personalComputer.Motherboard?.Chipset?.SuportedMemoryFrequencyList?[0] >
+                     personalComputer.Ram?.MemoryFrequencyList?[0].MemoryFrequency)
+            {
+                result.Unsuccess();
+                return result;
             }
         }
 

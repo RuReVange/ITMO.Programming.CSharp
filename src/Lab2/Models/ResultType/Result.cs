@@ -17,6 +17,7 @@ public class Result
     public bool IsHddInstalled { get; internal set; }
     public bool IsPcCaseInstalled { get; internal set; }
     public bool IsPowerSupplyUnitInstalled { get; internal set; }
+
     public bool IsWiFiAdapterInstalled { get; internal set; } = true;
 
     public void Success()

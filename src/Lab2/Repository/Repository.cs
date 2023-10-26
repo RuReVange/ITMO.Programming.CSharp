@@ -10,11 +10,14 @@ using Itmo.ObjectOrientedProgramming.Lab2.Models.Components.RamDirectory;
 using Itmo.ObjectOrientedProgramming.Lab2.Models.Components.SsdDirectory;
 using Itmo.ObjectOrientedProgramming.Lab2.Models.Components.VideocardDirectory;
 using Itmo.ObjectOrientedProgramming.Lab2.Models.Components.WiFiAdapterDirectory;
+using Itmo.ObjectOrientedProgramming.Lab2.Models.PersonalComputer;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Repository;
 
 public class Repository
 {
+    private static Repository? _instance;
+
     private readonly IMotherboardBuilder _motherboardBuilder;
     private readonly ICpuBuilder _cpuBuilder;
     private readonly ICpuCoolerBuilder _cpuCoolerBuilder;
@@ -26,7 +29,7 @@ public class Repository
     private readonly IPowerSupplyUnitBuilder _powerSupplyUnitBuilder;
     private readonly IWiFiAdapterBuilder _wiFiAdapterBuilder;
 
-    public Repository()
+    private Repository()
     {
         _motherboardBuilder = new MotherboardBuilder();
         _cpuBuilder = new CpuBuilder();
@@ -40,6 +43,7 @@ public class Repository
         _wiFiAdapterBuilder = new WiFiAdapterBuilder();
     }
 
+    public IList<IPersonalComputer> PersonalComputersList { get; init; } = new List<IPersonalComputer>();
     public IList<IMotherboard> MotherboardsList { get; init; } = new List<IMotherboard>();
     public IList<ICpu> CpuList { get; init; } = new List<ICpu>();
     public IList<ICpuCooler> CpuCoolerList { get; init; } = new List<ICpuCooler>();
@@ -66,7 +70,12 @@ public class Repository
         new Xmp("16-18-18-35", 1.15, 2666),
     };
 
-    public void GlobalInitializer()
+    public static Repository Instance()
+    {
+        return _instance ??= new Repository();
+    }
+
+    public void GlobalInitialize()
     {
         MotherboardInitializer();
         CpuInitializer();
@@ -301,12 +310,12 @@ public class Repository
     private void PcCasesInitializer()
     {
         PcCaseList.Add(
-            _pcCaseBuilder.WithFormFactor(new FormFactor(240, 496, 465))
+            _pcCaseBuilder.WithFormFactor(new FormFactor(260, 496, 465))
                 .WithMaxVideoCardFormFactor(new FormFactor(140, 70, 390))
                 .WithSupportedMotherboardFormFactor(new FormFactor(250, 50, 310))
                 .Build());
         PcCaseList.Add(
-            _pcCaseBuilder.WithFormFactor(new FormFactor(238, 523, 526))
+            _pcCaseBuilder.WithFormFactor(new FormFactor(310, 523, 526))
                 .WithMaxVideoCardFormFactor(new FormFactor(207, 94, 435))
                 .WithSupportedMotherboardFormFactor(new FormFactor(308, 57, 255))
                 .Build());
