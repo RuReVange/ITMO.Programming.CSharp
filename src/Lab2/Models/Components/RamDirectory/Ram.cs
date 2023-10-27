@@ -7,6 +7,7 @@ public class Ram : IRam
 {
     public Ram(int memorySize, IList<RamMemoryFrequencyAndVoltage>? memoryFrequencyList, Xmp? supportedXmpProfile, FormFactor? formFactor, string? ddrStandard, double powerConsumption)
     {
+        ComponentType = "Ram";
         MemorySize = memorySize;
         MemoryFrequencyList = memoryFrequencyList;
         SupportedXmpProfile = supportedXmpProfile;
@@ -15,6 +16,7 @@ public class Ram : IRam
         PowerConsumption = powerConsumption;
     }
 
+    public string ComponentType { get; init; }
     public int MemorySize { get; init; }
     public IList<RamMemoryFrequencyAndVoltage>? MemoryFrequencyList { get; init; }
     public Xmp? SupportedXmpProfile { get; init; }

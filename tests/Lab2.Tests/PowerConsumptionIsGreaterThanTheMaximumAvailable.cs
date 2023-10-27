@@ -12,20 +12,19 @@ public class PowerConsumptionIsGreaterThanTheMaximumAvailable
     public void TestMethod()
     {
         var repository = Repository.Instance();
-        repository.GlobalInitialize();
 
         IPersonalComputerBuilder personalComputerBuilder = new PersonalComputerBuilder();
         personalComputerBuilder
-            .WithMotherboard(repository.MotherboardsList[0])
-            .WithCpu(repository.CpuList[2])
-            .WithCpuCooler(repository.CpuCoolerList[0])
-            .WithRam(repository.RamList[1])
-            .WithVideocard(repository.VideocardList[1])
-            .WithSsd(repository.SsdList[1])
-            .WithHdd(repository.HddList[0])
-            .WithPcCase(repository.PcCaseList[1])
-            .WithWiFiAdapter(repository.WiFiAdapterList[0])
-            .WithPowerSupplyUnit(repository.PowerSupplyUnitList[0]);
+            .WithMotherboard(repository.Context.MotherboardsList[0])
+            .WithCpu(repository.Context.CpuList[2])
+            .WithCpuCooler(repository.Context.CpuCoolerList[0])
+            .WithRam(repository.Context.RamList[1])
+            .WithVideocard(repository.Context.VideocardList[1])
+            .WithSsd(repository.Context.SsdList[1])
+            .WithHdd(repository.Context.HddList[0])
+            .WithPcCase(repository.Context.PcCaseList[1])
+            .WithWiFiAdapter(repository.Context.WiFiAdapterList[0])
+            .WithPowerSupplyUnit(repository.Context.PowerSupplyUnitList[0]);
 
         IPersonalComputer personalComputer = personalComputerBuilder.Build();
 

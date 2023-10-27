@@ -1,6 +1,6 @@
 namespace Itmo.ObjectOrientedProgramming.Lab2.Models.Components.WiFiAdapterDirectory;
 
-public interface IWiFiAdapter
+public interface IWiFiAdapter : IComponent
 {
     public string? WiFiStandardVersion { get; init; }
     public bool IsBluetoothModule { get; init; }

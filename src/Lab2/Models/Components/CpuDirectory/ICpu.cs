@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Models.Components.CpuDirectory;
 
-public interface ICpu
+public interface ICpu : IComponent
 {
     public float CoreFrequency { get; init; }
     public int CoreQty { get; init; }

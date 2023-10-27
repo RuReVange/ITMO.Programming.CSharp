@@ -6,6 +6,7 @@ public class Videocard : IVideocard
 {
     public Videocard(FormFactor? formFactor, int videoCardMemorySize, int pcieVersion, int gpuFrequency, int powerConsumption)
     {
+        ComponentType = "Videocard";
         FormFactor = formFactor;
         VideoCardMemorySize = videoCardMemorySize;
         PcieVersion = pcieVersion;
@@ -13,6 +14,7 @@ public class Videocard : IVideocard
         PowerConsumption = powerConsumption;
     }
 
+    public string ComponentType { get; init; }
     public FormFactor? FormFactor { get; init; }
     public int VideoCardMemorySize { get; init; }
     public int PcieVersion { get; init; } // 1.0, 2.0, 3.0 и 4.0

@@ -14,6 +14,7 @@ public class Motherboard : IMotherboard
         FormFactor? formFactor,
         Bios? bios)
     {
+        ComponentType = "Motherboard";
         Socket = socket;
         PcieLineQty = pcieLineQty;
         SataPortQty = sataPortQty;
@@ -24,6 +25,7 @@ public class Motherboard : IMotherboard
         Bios = bios;
     }
 
+    public string ComponentType { get; init; }
     public string? Socket { get; init; }
     public int PcieLineQty { get; init; }
     public int SataPortQty { get; init; }

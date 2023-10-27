@@ -15,6 +15,7 @@ public class PersonalComputer : IPersonalComputer
 {
     public PersonalComputer(IMotherboard? motherboard, ICpu? cpu, ICpuCooler? cpuCooler, IRam? ram, IVideocard? videocard, ISsd? ssd, IHdd? hdd, IPcCase? pcCase, IPowerSupplyUnit? powerSupplyUnit, IWiFiAdapter? wiFiAdapter)
     {
+        ComponentType = "PersonalComputer";
         Motherboard = motherboard;
         Cpu = cpu;
         CpuCooler = cpuCooler;
@@ -27,6 +28,7 @@ public class PersonalComputer : IPersonalComputer
         WiFiAdapter = wiFiAdapter;
     }
 
+    public string ComponentType { get; init; }
     public IMotherboard? Motherboard { get; init; }
     public ICpu? Cpu { get; init; }
     public ICpuCooler? CpuCooler { get; init; }

@@ -4,12 +4,14 @@ public class Ssd : ISsd
 {
     public Ssd(string? connectionOption, int memorySize, int maxOperatingSpeed, int powerConsumption)
     {
+        ComponentType = "Ssd";
         ConnectionOption = connectionOption;
         MemorySize = memorySize;
         MaxOperatingSpeed = maxOperatingSpeed;
         PowerConsumption = powerConsumption;
     }
 
+    public string ComponentType { get; init; }
     public string? ConnectionOption { get; init; } // PCI-E / Sata
     public int MemorySize { get; init; } // Гб
     public int MaxOperatingSpeed { get; init; } // МБ/с

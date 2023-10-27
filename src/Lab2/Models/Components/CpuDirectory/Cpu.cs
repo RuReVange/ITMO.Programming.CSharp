@@ -6,6 +6,7 @@ public class Cpu : ICpu
 {
         public Cpu(float coreFrequency, int coreQty, string? socket, bool videoCore, IList<int> supportedMemoryFrequencyList, int tdp, int powerConsumption)
         {
+                ComponentType = "Cpu";
                 CoreFrequency = coreFrequency;
                 CoreQty = coreQty;
                 Socket = socket;
@@ -15,6 +16,7 @@ public class Cpu : ICpu
                 PowerConsumption = powerConsumption;
         }
 
+        public string ComponentType { get; init; }
         public float CoreFrequency { get; init; }
         public int CoreQty { get; init; }
         public string? Socket { get; init; }
