@@ -2,7 +2,7 @@ using Itmo.ObjectOrientedProgramming.Lab2.Models.Components.AuxiliaryComponents;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Models.Components.MotherboardDirectory;
 
-public interface IMotherboard : IComponent
+public interface IMotherboard
 {
     public string? Socket { get; }
     public int PcieLineQty { get; init; }

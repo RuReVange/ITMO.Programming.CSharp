@@ -3,7 +3,7 @@ using Itmo.ObjectOrientedProgramming.Lab2.Models.Components.AuxiliaryComponents;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Models.Components.RamDirectory;
 
-public interface IRam : IComponent
+public interface IRam
 {
     public int MemorySize { get; init; }
     public IList<RamMemoryFrequencyAndVoltage>? MemoryFrequencyList { get; init; }

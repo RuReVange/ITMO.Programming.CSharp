@@ -1,4 +1,3 @@
-using Itmo.ObjectOrientedProgramming.Lab2.Models.Components;
 using Itmo.ObjectOrientedProgramming.Lab2.Models.Components.CpuCoolerDirectory;
 using Itmo.ObjectOrientedProgramming.Lab2.Models.Components.CpuDirectory;
 using Itmo.ObjectOrientedProgramming.Lab2.Models.Components.HddDirectory;
@@ -12,7 +11,7 @@ using Itmo.ObjectOrientedProgramming.Lab2.Models.Components.WiFiAdapterDirectory
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Models.PersonalComputer;
 
-public interface IPersonalComputer : IComponent
+public interface IPersonalComputer
 {
     IMotherboard? Motherboard { get; init; }
     ICpu? Cpu { get; init; }

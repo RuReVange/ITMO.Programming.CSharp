@@ -2,7 +2,7 @@ using Itmo.ObjectOrientedProgramming.Lab2.Models.Components.AuxiliaryComponents;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Models.Components.VideocardDirectory;
 
-public interface IVideocard : IComponent
+public interface IVideocard
 {
     public FormFactor? FormFactor { get; init; }
     public int VideoCardMemorySize { get; init; }

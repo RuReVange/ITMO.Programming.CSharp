@@ -1,6 +1,6 @@
 namespace Itmo.ObjectOrientedProgramming.Lab2.Models.Components.SsdDirectory;
 
-public interface ISsd : IComponent
+public interface ISsd
 {
     public string? ConnectionOption { get; init; } // PCI-E / Sata
     public int MemorySize { get; init; } // Гб

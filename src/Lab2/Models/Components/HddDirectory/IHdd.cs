@@ -1,6 +1,6 @@
 namespace Itmo.ObjectOrientedProgramming.Lab2.Models.Components.HddDirectory;
 
-public interface IHdd : IComponent
+public interface IHdd
 {
     public int MemorySize { get; init; } // Гб
     public int SpindleRotationSpeed { get; init; } // об/мин

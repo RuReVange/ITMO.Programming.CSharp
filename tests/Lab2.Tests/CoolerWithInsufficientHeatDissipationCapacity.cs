@@ -28,6 +28,7 @@ public class CoolerWithInsufficientHeatDissipationCapacity
 
         IPersonalComputer personalComputer = personalComputerBuilder.Build();
 
+        repository.Add<IPersonalComputer>(repository.Context.PersonalComputerList, personalComputer);
         Result result = Validator.Validate(personalComputer);
 
         Assert.True(result.FinalResult is "Warranty obligations are denied. Some components may be unstable");

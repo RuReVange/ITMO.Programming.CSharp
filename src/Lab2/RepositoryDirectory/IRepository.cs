@@ -2,9 +2,11 @@ using System.Collections.Generic;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.RepositoryDirectory;
 
-public interface IRepository<T>
-    where T : class
+public interface IRepository
 {
-    void Add(IList<T> list, T item); // добавление объекта
-    void Delete(IList<T> list, int index); // удаление объекта по индексу
+    public void Add<T>(IList<T> list, T item)
+        where T : class;
+
+    public void Delete<T>(IList<T> list, int index)
+        where T : class;
 }
