@@ -5,16 +5,27 @@ namespace Itmo.ObjectOrientedProgramming.Lab3.Addressee;
 
 public class AddresseeProxy : IAddressee
 {
+    private readonly int _zeroImportanceLevel;
     private IAddressee? _addressee;
 
     public AddresseeProxy(IAddressee? addressee)
     {
         _addressee = addressee;
+        _zeroImportanceLevel = 0;
     }
 
-    public void SendMsg(Message message, Func<int, int, bool>? func = null)
+    public int GetThisPossibleImportanceLevel()
     {
-        _addressee?.SendMsg(message, Validate);
+        return _addressee != null ? _addressee.GetThisPossibleImportanceLevel() : _zeroImportanceLevel;
+    }
+
+    public void SendMsg(Message message)
+    {
+        if (message != null && _addressee != null && Validate(message.ImportanceLevel, GetThisPossibleImportanceLevel()))
+        {
+            _addressee.SendMsg(message);
+            Log(message);
+        }
     }
 
     private static bool Validate(int x, int y)

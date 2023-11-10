@@ -1,4 +1,3 @@
-using System;
 using Itmo.ObjectOrientedProgramming.Lab3.Models;
 using Itmo.ObjectOrientedProgramming.Lab3.UserDirectory;
 
@@ -15,11 +14,13 @@ public class UserAddressee : IConcreteAddressee
 
     public int PossibleImportanceLevel { get; init; } = 3;
 
-    public void SendMsg(Message message, Func<int, int, bool>? func)
+    public void SendMsg(Message message)
     {
-        if (message != null && func != null && func(message.ImportanceLevel, PossibleImportanceLevel))
-        {
-            _user.AddMsg(message);
-        }
+        _user.AddMsg(message);
+    }
+
+    public int GetThisPossibleImportanceLevel()
+    {
+        return PossibleImportanceLevel;
     }
 }

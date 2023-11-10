@@ -1,10 +1,9 @@
-using System;
 using System.Collections.Generic;
 using Itmo.ObjectOrientedProgramming.Lab3.Models;
 
 namespace Itmo.ObjectOrientedProgramming.Lab3.Addressee;
 
-public class GroupAddressee : IAddressee
+public class GroupAddressee : IConcreteAddressee
 {
     public GroupAddressee(IList<IConcreteAddressee> concreteAddresseesList)
     {
@@ -13,11 +12,18 @@ public class GroupAddressee : IAddressee
 
     public IList<IConcreteAddressee> ConcreteAddresseesList { get; init; }
 
-    public void SendMsg(Message message, Func<int, int, bool>? func)
+    public int PossibleImportanceLevel { get; init; } = 1;
+
+    public void SendMsg(Message message)
     {
         foreach (IConcreteAddressee concreteAddressee in ConcreteAddresseesList)
         {
-            concreteAddressee.SendMsg(message, func);
+            concreteAddressee.SendMsg(message);
         }
+    }
+
+    public int GetThisPossibleImportanceLevel()
+    {
+        return PossibleImportanceLevel;
     }
 }

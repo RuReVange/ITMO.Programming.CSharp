@@ -16,6 +16,6 @@ public class Topic
     public void SendMsg(Message message)
     {
         IAddressee proxy = new AddresseeProxy(Addressee);
-        proxy.SendMsg(message, null);
+        proxy.SendMsg(message);
     }
 }
