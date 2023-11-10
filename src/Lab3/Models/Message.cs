@@ -12,4 +12,9 @@ public class Message
     public string Header { get; init; }
     public string Body { get; init; }
     public int ImportanceLevel { get; init; }
+
+    public override string ToString()
+    {
+        return "Message";
+    }
 }

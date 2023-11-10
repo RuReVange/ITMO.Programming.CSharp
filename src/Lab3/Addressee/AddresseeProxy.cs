@@ -12,13 +12,18 @@ public class AddresseeProxy : IAddressee
         _addressee = addressee;
     }
 
-    public static bool Validate(int x, int y)
+    public void SendMsg(Message message, Func<int, int, bool>? func = null)
+    {
+        _addressee?.SendMsg(message, Validate);
+    }
+
+    private static bool Validate(int x, int y)
     {
         return x <= y;
     }
 
-    public void SendMsg(Message message, Func<int, int, bool>? func = default)
+    private void Log(Message message)
     {
-        _addressee?.SendMsg(message, Validate);
+        Console.WriteLine(message.ToString() + " was sended to " + _addressee?.ToString());
     }
 }
