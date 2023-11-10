@@ -5,11 +5,17 @@ namespace Itmo.ObjectOrientedProgramming.Lab3.Models;
 
 public class Messenger
 {
+    private string? _buffer;
     private IList<Message> _messages = new List<Message>();
 
     public void AddMsg(Message message)
     {
         _messages.Add(message);
+    }
+
+    public void MessengerBuffer(out string? value)
+    {
+        value = _buffer;
     }
 
     public void ShowMessage(int index)
@@ -20,7 +26,8 @@ public class Messenger
         }
         else
         {
-            Console.WriteLine("Messenger: " + _messages[index]);
+            Console.WriteLine("Messenger: " + _messages[index].Body);
+            _buffer = "Messenger: " + _messages[index].Body;
         }
     }
 }

@@ -6,12 +6,14 @@ namespace Itmo.ObjectOrientedProgramming.Lab3.Addressee;
 public class AddresseeProxy : IAddressee
 {
     private readonly int _zeroImportanceLevel;
+    private int _logCounter;
     private IAddressee? _addressee;
 
     public AddresseeProxy(IAddressee? addressee)
     {
         _addressee = addressee;
         _zeroImportanceLevel = 0;
+        _logCounter = 0;
     }
 
     public int GetThisPossibleImportanceLevel()
@@ -28,13 +30,19 @@ public class AddresseeProxy : IAddressee
         }
     }
 
+    public void Log(Message message)
+    {
+        Console.WriteLine(message?.ToString() + " was sended to " + _addressee?.ToString());
+        _logCounter += 1;
+    }
+
+    public void ReceiveLogCounter(out int value)
+    {
+         value = _logCounter;
+    }
+
     private static bool Validate(int x, int y)
     {
         return x <= y;
-    }
-
-    private void Log(Message message)
-    {
-        Console.WriteLine(message.ToString() + " was sended to " + _addressee?.ToString());
     }
 }
