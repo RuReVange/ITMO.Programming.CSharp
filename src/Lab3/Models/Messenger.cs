@@ -7,7 +7,7 @@ public class Messenger
 {
     private IList<Message> _messages = new List<Message>();
 
-    public void AddMessage(Message message)
+    public void AddMsg(Message message)
     {
         _messages.Add(message);
     }

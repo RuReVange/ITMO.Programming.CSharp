@@ -1,4 +1,4 @@
-namespace Itmo.ObjectOrientedProgramming.Lab3.Display;
+namespace Itmo.ObjectOrientedProgramming.Lab3.DisplayDirectory;
 
 public class WriteDisplayDecorator : BaseDisplayDecorator
 {

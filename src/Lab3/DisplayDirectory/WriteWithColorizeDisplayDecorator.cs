@@ -2,7 +2,7 @@ using System;
 using System.Drawing;
 using Itmo.ObjectOrientedProgramming.Lab3.Services.Modifiers;
 
-namespace Itmo.ObjectOrientedProgramming.Lab3.Display;
+namespace Itmo.ObjectOrientedProgramming.Lab3.DisplayDirectory;
 
 public class WriteWithColorizeDisplayDecorator : BaseDisplayDecorator
 {
