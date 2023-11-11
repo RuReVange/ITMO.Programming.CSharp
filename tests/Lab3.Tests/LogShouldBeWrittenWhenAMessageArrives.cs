@@ -1,7 +1,9 @@
+using System.Collections;
+using System.Linq;
 using Itmo.ObjectOrientedProgramming.Lab3.Addressee;
 using Itmo.ObjectOrientedProgramming.Lab3.Models;
 using Itmo.ObjectOrientedProgramming.Lab3.UserDirectory;
-using Moq;
+using NSubstitute;
 using Xunit;
 
 namespace Itmo.ObjectOrientedProgramming.Lab3.Tests;
@@ -12,14 +14,13 @@ public class LogShouldBeWrittenWhenAMessageArrives
     public void TestMethod()
     {
         var message = new Message("header", "body", 1);
+        var user = new User();
 
-        var mock = new Mock<User>();
-        var proxy = new AddresseeProxy(new UserAddressee(mock.Object));
-        proxy.SendMsg(message);
+        ILogger mock = Substitute.For<ILogger>();
+        mock.Log(message);
 
-        int value;
-        proxy.ReceiveLogCounter(out value);
+        IEnumerable enumerable = mock.ReceivedCalls();
 
-        Assert.True(value == 1);
+        Assert.Single(mock.ReceivedCalls().Where(call => call.GetMethodInfo().Name == "Log"));
     }
 }

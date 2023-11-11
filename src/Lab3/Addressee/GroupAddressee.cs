@@ -3,27 +3,20 @@ using Itmo.ObjectOrientedProgramming.Lab3.Models;
 
 namespace Itmo.ObjectOrientedProgramming.Lab3.Addressee;
 
-public class GroupAddressee : IConcreteAddressee
+public class GroupAddressee : IAddressee
 {
-    public GroupAddressee(IList<IConcreteAddressee> concreteAddresseesList)
+    public GroupAddressee(IList<IAddressee> addresseeList)
     {
-        ConcreteAddresseesList = concreteAddresseesList;
+        AddresseeList = addresseeList;
     }
 
-    public IList<IConcreteAddressee> ConcreteAddresseesList { get; init; }
-
-    public int PossibleImportanceLevel { get; init; } = 1;
+    public IList<IAddressee> AddresseeList { get; init; }
 
     public void SendMsg(Message message)
     {
-        foreach (IConcreteAddressee concreteAddressee in ConcreteAddresseesList)
+        foreach (IAddressee concreteAddressee in AddresseeList)
         {
             concreteAddressee.SendMsg(message);
         }
-    }
-
-    public int GetThisPossibleImportanceLevel()
-    {
-        return PossibleImportanceLevel;
     }
 }

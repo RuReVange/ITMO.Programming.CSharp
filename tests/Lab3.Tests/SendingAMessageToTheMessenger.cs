@@ -13,7 +13,7 @@ public class SendingAMessageToTheMessenger
         var message = new Message("header", "body", 1);
 
         var mock = new Mock<Messenger>();
-        var proxy = new AddresseeProxy(new MessengerAddressee(mock.Object));
+        var proxy = new AddresseeFilterProxy(new MessengerAddressee(mock.Object), 3);
         proxy.SendMsg(message);
 
         string? tmp;

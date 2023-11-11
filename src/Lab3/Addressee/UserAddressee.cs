@@ -3,7 +3,7 @@ using Itmo.ObjectOrientedProgramming.Lab3.UserDirectory;
 
 namespace Itmo.ObjectOrientedProgramming.Lab3.Addressee;
 
-public class UserAddressee : IConcreteAddressee
+public class UserAddressee : IAddressee
 {
     private User _user;
 
@@ -12,15 +12,8 @@ public class UserAddressee : IConcreteAddressee
         _user = user;
     }
 
-    public int PossibleImportanceLevel { get; init; } = 3;
-
     public void SendMsg(Message message)
     {
         _user.AddMsg(message);
-    }
-
-    public int GetThisPossibleImportanceLevel()
-    {
-        return PossibleImportanceLevel;
     }
 }

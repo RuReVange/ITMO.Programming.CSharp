@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Itmo.ObjectOrientedProgramming.Lab3.Models;
 
@@ -14,6 +15,13 @@ public class User
 
     public MsgWithInfo GetMsgWithInfo(int index)
     {
-        return _msgList[index];
+        if (index < 0 || index >= _msgList.Count)
+        {
+            throw new ArgumentOutOfRangeException(nameof(index));
+        }
+        else
+        {
+            return _msgList[index];
+        }
     }
 }

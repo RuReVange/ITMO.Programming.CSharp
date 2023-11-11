@@ -1,11 +1,18 @@
+using Itmo.ObjectOrientedProgramming.Lab3.Models;
+
 namespace Itmo.ObjectOrientedProgramming.Lab3.DisplayDirectory;
 
-public class Display : BaseDisplay
+public class Display
 {
-    public Display() { }
-    public override void WriteMessage()
+    public Display(DisplayDriver driver)
     {
-        WriteMessageHeader();
-        WriteMessageBody();
+        Driver = driver;
+    }
+
+    public DisplayDriver Driver { get; init; }
+    protected internal Message? Message { get; set; }
+    public void AddMsg(Message message)
+    {
+        Message = message;
     }
 }

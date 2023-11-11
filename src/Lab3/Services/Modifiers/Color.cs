@@ -1,6 +1,3 @@
 namespace Itmo.ObjectOrientedProgramming.Lab3.Services.Modifiers;
 
-public interface IModifier
-{
-    string Modify(string value);
-}
+public record Color(byte R, byte G, byte B);

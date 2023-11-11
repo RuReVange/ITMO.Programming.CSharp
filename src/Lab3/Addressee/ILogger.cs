@@ -2,7 +2,7 @@ using Itmo.ObjectOrientedProgramming.Lab3.Models;
 
 namespace Itmo.ObjectOrientedProgramming.Lab3.Addressee;
 
-public interface IAddressee
+public interface ILogger
 {
-    void SendMsg(Message message);
+    public void Log(Message message);
 }
