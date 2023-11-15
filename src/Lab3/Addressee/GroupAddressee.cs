@@ -5,16 +5,15 @@ namespace Itmo.ObjectOrientedProgramming.Lab3.Addressee;
 
 public class GroupAddressee : IAddressee
 {
+    private IList<IAddressee> _addresseeList;
     public GroupAddressee(IList<IAddressee> addresseeList)
     {
-        AddresseeList = addresseeList;
+        _addresseeList = addresseeList;
     }
-
-    public IList<IAddressee> AddresseeList { get; init; }
 
     public void SendMsg(Message message)
     {
-        foreach (IAddressee concreteAddressee in AddresseeList)
+        foreach (IAddressee concreteAddressee in _addresseeList)
         {
             concreteAddressee.SendMsg(message);
         }

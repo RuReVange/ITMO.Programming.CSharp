@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Linq;
 using Itmo.ObjectOrientedProgramming.Lab3.Addressee;
 using Itmo.ObjectOrientedProgramming.Lab3.Models;
 using Itmo.ObjectOrientedProgramming.Lab3.UserDirectory;
@@ -16,11 +14,10 @@ public class LogShouldBeWrittenWhenAMessageArrives
         var message = new Message("header", "body", 1);
         var user = new User();
 
-        ILogger mock = Substitute.For<ILogger>();
-        mock.Log(message);
+        Logger mock = Substitute.For<Logger>();
+        IAddressee addressee = new AddresseeLogger(new UserAddressee(user), mock);
+        addressee.SendMsg(message);
 
-        IEnumerable enumerable = mock.ReceivedCalls();
-
-        Assert.Single(mock.ReceivedCalls().Where(call => call.GetMethodInfo().Name == "Log"));
+        Assert.True(mock.LogCounter == 1);
     }
 }

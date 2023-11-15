@@ -4,15 +4,22 @@ namespace Itmo.ObjectOrientedProgramming.Lab3.DisplayDirectory;
 
 public class Display
 {
+    private DisplayDriver _driver;
+    private Message? _message;
     public Display(DisplayDriver driver)
     {
-        Driver = driver;
+        _driver = driver;
     }
 
-    public DisplayDriver Driver { get; init; }
-    protected internal Message? Message { get; set; }
     public void AddMsg(Message message)
     {
-        Message = message;
+        _message = message;
+    }
+
+    public void SendMsg()
+    {
+        if (_message is null) return;
+        _driver.WriteMsg(_message);
+        _driver.CleanDriver(_message);
     }
 }

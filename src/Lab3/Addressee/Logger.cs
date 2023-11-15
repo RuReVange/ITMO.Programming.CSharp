@@ -3,23 +3,12 @@ using Itmo.ObjectOrientedProgramming.Lab3.Models;
 
 namespace Itmo.ObjectOrientedProgramming.Lab3.Addressee;
 
-public class Logger : IAddressee, ILogger
+public class Logger
 {
-    private IAddressee? _addressee;
-
-    public Logger(IAddressee? addressee)
+    public int LogCounter { get; private set; }
+    public void Log(Message message, IAddressee addressee)
     {
-        _addressee = addressee;
-    }
-
-    public void SendMsg(Message message)
-    {
-        Log(message);
-        _addressee?.SendMsg(message);
-    }
-
-    public void Log(Message message)
-    {
-        Console.WriteLine(message?.ToString() + " was sended to " + _addressee?.ToString());
+        Console.WriteLine(message?.ToString() + " was sended to " + addressee?.ToString());
+        LogCounter++;
     }
 }
