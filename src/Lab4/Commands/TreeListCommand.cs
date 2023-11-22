@@ -1,23 +1,46 @@
 using System.IO;
+using System.Text;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.Commands;
 
 public class TreeListCommand : ICommand
 {
-    private string[] _subDirectoryCatalog;
-    private string[] _filesCatalog;
+    private string _path;
+    private int _depth;
+    private char _indentionSymbol;
+    private string _fileSymbols;
+    private string _catalogSymbols;
 
-    public TreeListCommand()
+    public TreeListCommand(int depth = 1, char indentionSymbol = ' ', string fileSymbol = "file: ", string catalogSymbols = "catalog: ")
     {
-        _subDirectoryCatalog = Directory.GetDirectories(Directory.GetCurrentDirectory());
-        _filesCatalog = Directory.GetFiles(Directory.GetCurrentDirectory());
+        _path = Directory.GetCurrentDirectory();
+        _depth = depth;
+        _indentionSymbol = indentionSymbol;
+        _fileSymbols = fileSymbol;
+        _catalogSymbols = catalogSymbols;
+        ResultString = new StringBuilder();
     }
+
+    public StringBuilder ResultString { get; init; }
 
     public void Execute()
     {
-        // for (int i = 0; i < depth; ++i)
-        // {
-        // }
+        ResultString.Clear();
+        ListDirectory(_path, _depth);
+    }
+
+    private void ListDirectory(string path, int depth, int indention = 0)
+    {
+        if (depth < 0) return;
+
+        foreach (string tmpItem in Directory.GetFileSystemEntries(path))
+        {
+            ResultString.Append(new string(_indentionSymbol, indention * 2) + (Directory.Exists(tmpItem) ? _catalogSymbols : _fileSymbols) + Path.GetFileName(tmpItem) + "\n");
+            if (Directory.Exists(tmpItem))
+            {
+                ListDirectory(tmpItem, depth - 1, indention + 1);
+            }
+        }
     }
 }
 
