@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using Itmo.ObjectOrientedProgramming.Lab4.Commands;
+using Itmo.ObjectOrientedProgramming.Lab4.DataContext;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4;
 
@@ -36,5 +38,17 @@ public static class Program
         // command.Execute();
         // command = new TreeListCommand(2);
         // command.Execute();
+        string testString = "file show C:\\Users\\Daniil\\Desktop -m Mode";
+
+        var commandContext = new CommandContext();
+        commandContext.Parse(testString);
+        Console.WriteLine(commandContext.CommandNameAndAtributes);
+        if (commandContext.FlagDictionary != null)
+        {
+            foreach (KeyValuePair<string, string> item in commandContext.FlagDictionary)
+            {
+                Console.WriteLine($"{item.Key} -> {item.Value}");
+            }
+        }
     }
 }
