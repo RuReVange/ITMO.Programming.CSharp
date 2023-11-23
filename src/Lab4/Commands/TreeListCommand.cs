@@ -1,5 +1,5 @@
 using System.IO;
-using System.Text;
+using Itmo.ObjectOrientedProgramming.Lab4.DataContext;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.Commands;
 
@@ -18,14 +18,11 @@ public class TreeListCommand : ICommand
         _indentionSymbol = indentionSymbol;
         _fileSymbols = fileSymbol;
         _catalogSymbols = catalogSymbols;
-        ResultString = new StringBuilder();
     }
-
-    public StringBuilder ResultString { get; init; }
 
     public void Execute()
     {
-        ResultString.Clear();
+        Context.ResultCommandString.Clear();
         ListDirectory(_path, _depth);
     }
 
@@ -35,7 +32,7 @@ public class TreeListCommand : ICommand
 
         foreach (string tmpItem in Directory.GetFileSystemEntries(path))
         {
-            ResultString.Append(new string(_indentionSymbol, indention * 2) + (Directory.Exists(tmpItem) ? _catalogSymbols : _fileSymbols) + Path.GetFileName(tmpItem) + "\n");
+            Context.ResultCommandString.Append(new string(_indentionSymbol, indention * 2) + (Directory.Exists(tmpItem) ? _catalogSymbols : _fileSymbols) + Path.GetFileName(tmpItem) + "\n");
             if (Directory.Exists(tmpItem))
             {
                 ListDirectory(tmpItem, depth - 1, indention + 1);
