@@ -13,9 +13,8 @@ public class Topic
     public string Name { get; init; }
     public IAddressee Addressee { get; init; }
 
-    public void SendMsg(Message message, int possibleImportanceLevel)
+    public void SendMsg(Message message)
     {
-        IAddressee proxy = new AddresseeFilterProxy(Addressee, possibleImportanceLevel);
-        proxy.SendMsg(message);
+        Addressee.SendMsg(message);
     }
 }

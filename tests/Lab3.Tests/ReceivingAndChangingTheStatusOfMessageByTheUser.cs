@@ -14,7 +14,7 @@ public class ReceivingAndChangingTheStatusOfMessageByTheUser
         var message = new Message("header", "body", 2);
         var user = new User();
         var topic = new Topic("Topic", new UserAddressee(user));
-        topic.SendMsg(message, 3);
+        topic.SendMsg(message);
 
         Assert.True(user.GetMsgWithInfo(0).Message.Body == "body" && user.GetMsgWithInfo(0).IsUnread()); // передается по умолчанию как "unread"
 

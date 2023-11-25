@@ -14,10 +14,10 @@ public class LogShouldBeWrittenWhenAMessageArrives
         var message = new Message("header", "body", 1);
         var user = new User();
 
-        Logger mock = Substitute.For<Logger>();
+        MockLogger mock = Substitute.For<MockLogger>();
         IAddressee addressee = new AddresseeLogger(new UserAddressee(user), mock);
         addressee.SendMsg(message);
 
-        Assert.True(mock.LogCounter == 1);
+        Assert.True(MockLogger.LogCounter == 1);
     }
 }

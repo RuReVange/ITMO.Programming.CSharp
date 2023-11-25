@@ -5,9 +5,9 @@ namespace Itmo.ObjectOrientedProgramming.Lab3.Addressee;
 public class AddresseeLogger : IAddressee
 {
     private IAddressee _addressee;
-    private Logger _logger;
+    private ILogger _logger;
 
-    public AddresseeLogger(IAddressee addressee, Logger logger)
+    public AddresseeLogger(IAddressee addressee, ILogger logger)
     {
         _addressee = addressee;
         _logger = logger;
