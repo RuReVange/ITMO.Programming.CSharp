@@ -20,6 +20,6 @@ public class FileRenameCommand : ICommand
         string tmpDirectory = Path.GetDirectoryName(_path) ?? _path;
         string tmpNewPath = tmpDirectory != _path ? Path.Combine(tmpDirectory, _name) : _path;
 
-        File.Move(_path, tmpNewPath);
+        File.Move(_path, tmpNewPath, true);
     }
 }

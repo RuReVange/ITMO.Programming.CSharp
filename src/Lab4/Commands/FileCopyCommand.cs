@@ -15,6 +15,6 @@ public class FileCopyCommand : ICommand
 
     public void Execute()
     {
-        File.Copy(_sourcePath, _destinationPath);
+        File.Copy(_sourcePath, _destinationPath, true);
     }
 }

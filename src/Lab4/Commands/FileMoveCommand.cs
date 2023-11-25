@@ -15,6 +15,6 @@ public class FileMoveCommand : ICommand
 
     public void Execute()
     {
-        File.Move(_sourcePath, _destinationPath);
+        File.Move(_sourcePath, _destinationPath, true);
     }
 }
