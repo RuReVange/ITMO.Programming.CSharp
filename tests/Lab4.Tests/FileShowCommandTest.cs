@@ -10,8 +10,9 @@ public class FileShowCommandTest
     [Fact]
     public void Method()
     {
-        string path = Path.GetFullPath(Directory.GetCurrentDirectory());
-        path = Path.Combine(path, "..//..//..//lab4.txt");
+        string path = Path.GetFullPath("lab4.txt");
+
+        // path = Path.Combine(path, "..//..//..//lab4.txt");
         string parsingString = $"file show {path} -m console";
 
         // string parsingString = https://github.com/is-oop-y26/RuReVange/blob/lab-4/tests/Lab4.Tests/ "file show C:\\Users\\Daniil\\Desktop\\БЭВМ\\Трассировки\\lab4.txt -m console";
