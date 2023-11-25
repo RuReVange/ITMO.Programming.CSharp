@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using Itmo.ObjectOrientedProgramming.Lab4.DataContext;
 
@@ -22,6 +23,12 @@ public class TreeListCommand : ICommand
 
     public void Execute()
     {
+        if (!Directory.Exists(_path))
+        {
+            Console.WriteLine("This directory doesn't exist");
+            return;
+        }
+
         Context.ResultCommandString.Clear();
         ListDirectory(_path, _depth);
     }

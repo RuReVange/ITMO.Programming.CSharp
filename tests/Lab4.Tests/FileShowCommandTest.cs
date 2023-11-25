@@ -9,8 +9,9 @@ public class FileShowCommandTest
     [Fact]
     public void Method()
     {
-        string parsingString = "file show C:\\Users\\Daniil\\Desktop\\БЭВМ\\Трассировки\\lab4.txt -m console";
+        string parsingString = "file show ./lab4.txt -m console";
 
+        // string parsingString = "file show C:\\Users\\Daniil\\Desktop\\БЭВМ\\Трассировки\\lab4.txt -m console";
         var commandContext = new CommandContext();
         commandContext.Parse(parsingString);
 

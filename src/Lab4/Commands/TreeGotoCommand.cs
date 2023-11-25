@@ -14,13 +14,12 @@ public class TreeGotoCommand : ICommand
 
     public void Execute()
     {
-        if (Directory.Exists(_path))
+        if (!Directory.Exists(_path))
         {
-            Directory.SetCurrentDirectory(_path);
+            Console.WriteLine("This directory doesn't exist");
+            return;
         }
-        else
-        {
-            throw new ArgumentException();
-        }
+
+        Directory.SetCurrentDirectory(_path);
     }
 }

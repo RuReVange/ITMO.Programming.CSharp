@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.Commands;
@@ -15,7 +16,11 @@ public class FileRenameCommand : ICommand
 
     public void Execute()
     {
-        if (!File.Exists(_path)) return;
+        if (!File.Exists(_path))
+        {
+            Console.WriteLine("This path doesn't exist");
+            return;
+        }
 
         string tmpDirectory = Path.GetDirectoryName(_path) ?? _path;
         string tmpNewPath = tmpDirectory != _path ? Path.Combine(tmpDirectory, _name) : _path;

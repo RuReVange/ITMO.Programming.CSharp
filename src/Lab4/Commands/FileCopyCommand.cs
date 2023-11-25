@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.Commands;
@@ -15,6 +16,12 @@ public class FileCopyCommand : ICommand
 
     public void Execute()
     {
+        if (!File.Exists(_sourcePath) || !File.Exists(_destinationPath))
+        {
+            Console.WriteLine("This path doesn't exist");
+            return;
+        }
+
         File.Copy(_sourcePath, _destinationPath, true);
     }
 }

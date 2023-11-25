@@ -15,14 +15,13 @@ public class FileShowCommand : ICommand
 
     public void Execute()
     {
-        if (File.Exists(_path))
+        if (!File.Exists(_path))
         {
-            Context.ResultCommandString.Clear();
-            Context.ResultCommandString.Append(File.ReadAllText(_path));
+            Console.WriteLine("This path doesn't exist");
+            return;
         }
-        else
-        {
-            throw new ArgumentException();
-        }
+
+        Context.ResultCommandString.Clear();
+        Context.ResultCommandString.Append(File.ReadAllText(_path));
     }
 }
