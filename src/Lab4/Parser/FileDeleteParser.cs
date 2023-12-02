@@ -10,8 +10,6 @@ public class FileDeleteParser : IParser
     {
         if (commandContext == null) return;
         commandContext.CommandNameAndAtributes = commandContext.CommandNameAndAtributes?.Trim();
-
-        ICommand command = new FileDeleteCommand(commandContext.CommandNameAndAtributes ?? throw new InvalidOperationException());
-        command.Execute();
+        commandContext.Command = new FileDeleteCommand(commandContext.CommandNameAndAtributes ?? throw new InvalidOperationException());
     }
 }

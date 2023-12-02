@@ -8,7 +8,6 @@ public class ConnectLocalModeParser : IParser
     public void Parse(CommandContext commandContext)
     {
         if (commandContext?.CommandNameAndAtributes == null) return;
-        ICommand command = new ConnectCommand(commandContext.CommandNameAndAtributes);
-        command.Execute();
+        commandContext.Command = new ConnectCommand(commandContext.CommandNameAndAtributes);
     }
 }

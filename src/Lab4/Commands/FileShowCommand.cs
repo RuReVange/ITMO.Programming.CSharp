@@ -21,7 +21,7 @@ public class FileShowCommand : ICommand
             return;
         }
 
-        Context.ResultCommandString.Clear();
-        Context.ResultCommandString.Append(File.ReadAllText(_path));
+        CommandContext.ResultCommandString.Clear();
+        CommandContext.ResultCommandString.Append(File.ReadAllText(_path));
     }
 }

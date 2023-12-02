@@ -29,7 +29,7 @@ public class TreeListCommand : ICommand
             return;
         }
 
-        Context.ResultCommandString.Clear();
+        CommandContext.ResultCommandString.Clear();
         ListDirectory(_path, _depth);
     }
 
@@ -39,7 +39,7 @@ public class TreeListCommand : ICommand
 
         foreach (string tmpItem in Directory.GetFileSystemEntries(path))
         {
-            Context.ResultCommandString.Append(new string(_indentionSymbol, indention * 2) + (Directory.Exists(tmpItem) ? _catalogSymbols : _fileSymbols) + Path.GetFileName(tmpItem) + "\n");
+            CommandContext.ResultCommandString.Append(new string(_indentionSymbol, indention * 2) + (Directory.Exists(tmpItem) ? _catalogSymbols : _fileSymbols) + Path.GetFileName(tmpItem) + "\n");
             if (Directory.Exists(tmpItem))
             {
                 ListDirectory(tmpItem, depth - 1, indention + 1);

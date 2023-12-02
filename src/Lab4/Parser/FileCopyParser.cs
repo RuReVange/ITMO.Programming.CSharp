@@ -12,7 +12,6 @@ public class FileCopyParser : IParser
         commandContext.CommandNameAndAtributes = commandContext.CommandNameAndAtributes?.Trim();
         string[] tmp = commandContext.CommandNameAndAtributes?.Split() ?? throw new InvalidOperationException();
 
-        ICommand command = new FileCopyCommand(tmp[0], tmp[1]);
-        command.Execute();
+        commandContext.Command = new FileCopyCommand(tmp[0], tmp[1]);
     }
 }

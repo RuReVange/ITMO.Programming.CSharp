@@ -12,7 +12,6 @@ public class FileRenameParser : IParser
         commandContext.CommandNameAndAtributes = commandContext.CommandNameAndAtributes?.Trim();
         string[] tmp = commandContext.CommandNameAndAtributes?.Split() ?? throw new InvalidOperationException();
 
-        ICommand command = new FileRenameCommand(tmp[0], tmp[1]);
-        command.Execute();
+        commandContext.Command = new FileRenameCommand(tmp[0], tmp[1]);
     }
 }

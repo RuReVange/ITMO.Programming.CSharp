@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Globalization;
 using Itmo.ObjectOrientedProgramming.Lab4.Commands;
@@ -15,9 +14,7 @@ public class TreeListDepthParser : IParser
         {
             if (item.Key == "-d")
             {
-                ICommand command = new TreeListCommand(int.Parse(item.Value, provider: new NumberFormatInfo()));
-                command.Execute();
-                Console.WriteLine(Context.ResultCommandString);
+                commandContext.Command = new TreeListCommand(int.Parse(item.Value, provider: new NumberFormatInfo()));
             }
         }
     }

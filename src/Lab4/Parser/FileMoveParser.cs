@@ -12,7 +12,6 @@ public class FileMoveParser : IParser
         commandContext.CommandNameAndAtributes = commandContext.CommandNameAndAtributes?.Trim();
         string[] tmp = commandContext.CommandNameAndAtributes?.Split() ?? throw new InvalidOperationException();
 
-        ICommand command = new FileMoveCommand(tmp[0], tmp[1]);
-        command.Execute();
+        commandContext.Command = new FileMoveCommand(tmp[0], tmp[1]);
     }
 }

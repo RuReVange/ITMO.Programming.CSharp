@@ -1,12 +1,10 @@
 using System.Collections.Generic;
-using System.Text;
 using Itmo.ObjectOrientedProgramming.Lab4.Parser;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.DataContext;
 
 public static class Context
 {
-    public static StringBuilder ResultCommandString { get; } = new StringBuilder();
     public static Dictionary<string, IParser> FirstLevelDictionary { get; private set; }
         = new Dictionary<string, IParser>()
     {

@@ -1,4 +1,4 @@
-using System.IO;
+using Itmo.ObjectOrientedProgramming.Lab4.Commands;
 using Itmo.ObjectOrientedProgramming.Lab4.DataContext;
 using Itmo.ObjectOrientedProgramming.Lab4.Parser;
 using Xunit;
@@ -10,19 +10,14 @@ public class FileShowCommandTest
     [Fact]
     public void Method()
     {
-        string path = Path.GetFullPath("lab4.txt");
-
-        // path = Path.Combine(path, "..//..//..//lab4.txt");
-        string parsingString = $"file show {path} -m console";
-
-        // string parsingString = https://github.com/is-oop-y26/RuReVange/blob/lab-4/tests/Lab4.Tests/ "file show C:\\Users\\Daniil\\Desktop\\БЭВМ\\Трассировки\\lab4.txt -m console";
+        string parsingString = "file show C:\\Users\\Daniil\\Desktop\\БЭВМ\\Трассировки\\lab4.txt -m console";
         var commandContext = new CommandContext();
-        commandContext.Parse(parsingString);
+        CommandParser.Parse(commandContext, parsingString);
 
         IParser parser = new StartParser();
         parser.Parse(commandContext);
 
-        Assert.True(Context.ResultCommandString.Equals("Vishel zayac pogulyat'"));
+        Assert.True(commandContext.Command is FileShowCommand);
     }
 }
 

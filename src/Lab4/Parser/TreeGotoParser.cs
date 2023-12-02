@@ -8,7 +8,6 @@ public class TreeGotoParser : IParser
     public void Parse(CommandContext commandContext)
     {
         if (commandContext?.CommandNameAndAtributes == null) return;
-        ICommand command = new TreeGotoCommand(commandContext.CommandNameAndAtributes);
-        command.Execute();
+        commandContext.Command = new TreeGotoCommand(commandContext.CommandNameAndAtributes);
     }
 }

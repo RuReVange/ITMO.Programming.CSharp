@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Itmo.ObjectOrientedProgramming.Lab4.Commands;
 using Itmo.ObjectOrientedProgramming.Lab4.DataContext;
@@ -19,9 +18,7 @@ public class TreeListParser : IParser
         }
         else
         {
-            ICommand command = new TreeListCommand();
-            command.Execute();
-            Console.WriteLine(Context.ResultCommandString);
+            if (commandContext != null) commandContext.Command = new TreeListCommand();
         }
     }
 }

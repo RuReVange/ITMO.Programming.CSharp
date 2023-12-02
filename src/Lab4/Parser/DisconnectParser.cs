@@ -7,7 +7,6 @@ public class DisconnectParser : IParser
 {
     public void Parse(CommandContext commandContext)
     {
-        ICommand command = new DisconnectCommand();
-        command.Execute();
+        commandContext.Command = new DisconnectCommand();
     }
 }

@@ -1,30 +1,32 @@
-// using Itmo.ObjectOrientedProgramming.Lab4.DataContext;
-// using Itmo.ObjectOrientedProgramming.Lab4.Parser;
-// using Xunit;
-//
-// namespace Itmo.ObjectOrientedProgramming.Lab4.Tests;
-//
-// public class TreeListCommandTest
-// {
-//     [Fact]
-//     public void Method()
-//     {
-//         string parsingString = "connect C:\\Users\\Daniil\\Desktop\\БЭВМ\\Трассировки -m local";
-//
-//         var commandContext = new CommandContext();
-//         commandContext.Parse(parsingString);
-//
-//         IParser parser = new StartParser();
-//         parser.Parse(commandContext);
-//
-//         parsingString = "tree list";
-//         commandContext = new CommandContext();
-//         commandContext.Parse(parsingString);
-//         parser.Parse(commandContext);
-//
-//         Assert.True(Context.ResultCommandString.Equals("file: lab4.txt\nfile: tracing.html\nfile: tracingLaba1.html\n"));
-//     }
-// }
+using Itmo.ObjectOrientedProgramming.Lab4.Commands;
+using Itmo.ObjectOrientedProgramming.Lab4.DataContext;
+using Itmo.ObjectOrientedProgramming.Lab4.Parser;
+using Xunit;
+
+namespace Itmo.ObjectOrientedProgramming.Lab4.Tests;
+
+public class TreeListCommandTest
+{
+    [Fact]
+    public void Method()
+    {
+        string parsingString = "connect C:\\Users\\Daniil\\Desktop\\БЭВМ\\Трассировки -m local";
+        var commandContext = new CommandContext();
+        CommandParser.Parse(commandContext, parsingString);
+
+        IParser parser = new StartParser();
+        parser.Parse(commandContext);
+
+        Assert.True(commandContext.Command is ConnectCommand);
+
+        parsingString = "tree list";
+        commandContext = new CommandContext();
+        CommandParser.Parse(commandContext, parsingString);
+        parser.Parse(commandContext);
+
+        Assert.True(commandContext.Command is TreeListCommand);
+    }
+}
 
 // connect C:\Users\Daniil\Desktop -m local
 // tree goto C:\Users\Daniil\Desktop\БЭВМ\Трассировки
