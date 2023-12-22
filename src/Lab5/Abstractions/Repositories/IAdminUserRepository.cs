@@ -4,8 +4,8 @@ namespace Abstractions.Repositories;
 
 public interface IAdminUserRepository
 {
-    bool AddRegularUser(string password);
-    bool ChangeSystemPassword(int adminUserId, string newPassword);
-    RegularUser? FindRegularUser(int id);
-    IList<Log> ShowLogHistory();
+    bool AddRegularUser(string password, AdminUser adminUser);
+    bool ChangeSystemPassword(string newPassword, AdminUser adminUser);
+    RegularUser? FindRegularUser(int id, AdminUser adminUser);
+    IList<Log> ShowLogHistory(int id);
 }

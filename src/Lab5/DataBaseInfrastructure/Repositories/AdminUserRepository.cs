@@ -7,13 +7,7 @@ namespace DataBaseInfrastructure.Repositories;
 
 public class AdminUserRepository : IAdminUserRepository
 {
-    private AdminUser _adminUser;
-    public AdminUserRepository(AdminUser adminUser)
-    {
-        _adminUser = adminUser;
-    }
-
-    public bool AddRegularUser(string password)
+    public bool AddRegularUser(string password, AdminUser adminUser)
     {
         using NpgsqlConnection connection = DataSourceConnection.Connect();
         connection.Open();
@@ -29,8 +23,8 @@ public class AdminUserRepository : IAdminUserRepository
 
         commandString = @"insert into Logs (UserId, UserType, Message) VALUES (@UserId, @UserType, @Message)";
         command.CommandText = commandString;
-        command.Parameters.Add(new NpgsqlParameter("UserId", _adminUser.Id));
-        command.Parameters.Add(new NpgsqlParameter("UserType", _adminUser.ToString()));
+        command.Parameters.Add(new NpgsqlParameter("UserId", adminUser.Id));
+        command.Parameters.Add(new NpgsqlParameter("UserType", adminUser.ToString()));
         command.Parameters.Add(new NpgsqlParameter("Message", $"RegularUser with ID:{tmpIdRegularUser} was created"));
         command.ExecuteNonQuery();
 
@@ -39,7 +33,7 @@ public class AdminUserRepository : IAdminUserRepository
         return true;
     }
 
-    public bool ChangeSystemPassword(int adminUserId, string newPassword)
+    public bool ChangeSystemPassword(string newPassword, AdminUser adminUser)
     {
         using NpgsqlConnection connection = DataSourceConnection.Connect();
         connection.Open();
@@ -48,14 +42,14 @@ public class AdminUserRepository : IAdminUserRepository
         using NpgsqlTransaction transaction = connection.BeginTransaction();
         using var command = new NpgsqlCommand(commandString, connection);
         command.Parameters.Add(new NpgsqlParameter("password", newPassword));
-        command.Parameters.Add(new NpgsqlParameter("adminUserId", adminUserId));
+        command.Parameters.Add(new NpgsqlParameter("adminUserId", adminUser.Id));
         command.ExecuteNonQuery();
 
         commandString = @"insert into Logs (UserId, UserType, Message) VALUES (@UserId, @UserType, @Message)";
         command.CommandText = commandString;
-        command.Parameters.Add(new NpgsqlParameter("UserId", _adminUser.Id));
-        command.Parameters.Add(new NpgsqlParameter("UserType", _adminUser.ToString()));
-        command.Parameters.Add(new NpgsqlParameter("Message", $"AdminUser's(ID:{adminUserId}) SystemPassword was changed"));
+        command.Parameters.Add(new NpgsqlParameter("UserId", adminUser.Id));
+        command.Parameters.Add(new NpgsqlParameter("UserType", adminUser.ToString()));
+        command.Parameters.Add(new NpgsqlParameter("Message", $"AdminUser's(ID:{adminUser.Id}) SystemPassword was changed"));
         command.ExecuteNonQuery();
 
         transaction.Commit();
@@ -63,7 +57,7 @@ public class AdminUserRepository : IAdminUserRepository
         return true;
     }
 
-    public RegularUser? FindRegularUser(int id)
+    public RegularUser? FindRegularUser(int id, AdminUser adminUser)
     {
         using NpgsqlConnection connection = DataSourceConnection.Connect();
         connection.Open();
@@ -84,9 +78,9 @@ public class AdminUserRepository : IAdminUserRepository
 
         commandString = @"insert into Logs (UserId, UserType, Message) VALUES (@UserId, @UserType, @Message)";
         command.CommandText = commandString;
-        command.Parameters.Add(new NpgsqlParameter("UserId", _adminUser.Id));
-        command.Parameters.Add(new NpgsqlParameter("UserType", _adminUser.ToString()));
-        command.Parameters.Add(new NpgsqlParameter("Message", $"AdminUser with ID:{_adminUser.Id} tried to find a RegularUser with an ID:{tmpRegularUser.Id}"));
+        command.Parameters.Add(new NpgsqlParameter("UserId", adminUser.Id));
+        command.Parameters.Add(new NpgsqlParameter("UserType", adminUser.ToString()));
+        command.Parameters.Add(new NpgsqlParameter("Message", $"AdminUser with ID:{adminUser.Id} tried to find a RegularUser with an ID:{tmpRegularUser.Id}"));
         command.ExecuteNonQuery();
 
         transaction.Commit();
@@ -94,7 +88,7 @@ public class AdminUserRepository : IAdminUserRepository
         return tmpRegularUser;
     }
 
-    public IList<Log> ShowLogHistory()
+    public IList<Log> ShowLogHistory(int id)
     {
         using NpgsqlConnection connection = DataSourceConnection.Connect();
         connection.Open();
@@ -102,7 +96,7 @@ public class AdminUserRepository : IAdminUserRepository
         string commandString = @"select * from Logs where UserId = (@UserId)";
         using NpgsqlTransaction transaction = connection.BeginTransaction();
         using var command = new NpgsqlCommand(commandString, connection);
-        command.Parameters.Add(new NpgsqlParameter("UserId", _adminUser.Id));
+        command.Parameters.Add(new NpgsqlParameter("UserId", id));
         NpgsqlDataReader reader = command.ExecuteReader();
 
         var logList = new List<Log>();

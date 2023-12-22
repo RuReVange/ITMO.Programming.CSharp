@@ -4,8 +4,9 @@ namespace Abstractions.Repositories;
 
 public interface IRegularUserRepository
 {
-    int ShowAccountBalance();
-    bool WithdrawMoney(int moneyAmount);
-    bool RefillAccount(int moneyAmount);
-    IList<Log> ShowLogHistory();
+    RegularUser? FindRegularUser(RegularUser regularUser);
+    int ShowAccountBalance(RegularUser regularUser);
+    bool WithdrawMoney(int moneyAmount, RegularUser regularUser);
+    bool RefillAccount(int moneyAmount, RegularUser regularUser);
+    IList<Log> ShowLogHistory(RegularUser regularUser);
 }
