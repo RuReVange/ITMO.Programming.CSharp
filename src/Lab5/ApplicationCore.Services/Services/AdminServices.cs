@@ -2,7 +2,6 @@ using System.Globalization;
 using ApplicationCore.Models.DomainModels;
 using ApplicationCore.Services.DomainServices;
 using DataBaseInfrastructure.Repositories;
-using ParserInfrastructure.DataContext;
 
 namespace ApplicationCore.Services.Services;
 
@@ -60,5 +59,10 @@ public class AdminServices : IAdminServices
         }
 
         return true;
+    }
+
+    public void Logout()
+    {
+        _adminUser = null;
     }
 }

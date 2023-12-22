@@ -1,4 +1,4 @@
-using ParserInfrastructure.DataContext;
+using ApplicationCore.Models.DomainModels;
 
 namespace ParserInfrastructure.Parser;
 

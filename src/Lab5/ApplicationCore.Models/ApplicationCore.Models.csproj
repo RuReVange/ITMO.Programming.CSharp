@@ -10,8 +10,4 @@
       <PackageReference Include="Npgsql" />
     </ItemGroup>
 
-    <ItemGroup>
-      <ProjectReference Include="..\ParserInfrastructure\ParserInfrastructure.csproj" />
-    </ItemGroup>
-
 </Project>

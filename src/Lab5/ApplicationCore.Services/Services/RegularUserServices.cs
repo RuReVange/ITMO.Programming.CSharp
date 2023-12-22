@@ -2,7 +2,6 @@ using System.Globalization;
 using ApplicationCore.Models.DomainModels;
 using ApplicationCore.Services.DomainServices;
 using DataBaseInfrastructure.Repositories;
-using ParserInfrastructure.DataContext;
 
 namespace ApplicationCore.Services.Services;
 
@@ -46,7 +45,7 @@ public class RegularUserServices : IRegularUserServices
         return _regularUserRepository.WithdrawMoney(
             Convert.ToInt32(commandContext.FlagDictionary["-b"], new NumberFormatInfo()), _regularUser);
 
-        // "-1" - код ошибки. Если возвратит ее, то либо недостаточно денег на счету, или незалогинен юзер
+        // "-1" - код ошибки. Если возвращает ее, то либо недостаточно денег на счету, или незалогинен юзер
     }
 
     public int RefillAccount(CommandContext commandContext)
@@ -76,5 +75,10 @@ public class RegularUserServices : IRegularUserServices
         }
 
         return true;
+    }
+
+    public void Logout()
+    {
+        _regularUser = null;
     }
 }

@@ -1,4 +1,4 @@
-using ParserInfrastructure.DataContext;
+using ApplicationCore.Models.DomainModels;
 
 namespace ApplicationCore.Services.DomainServices;
 
@@ -9,4 +9,5 @@ public interface IRegularUserServices
     int WithdrawMoney(CommandContext commandContext);
     int RefillAccount(CommandContext commandContext);
     bool ShowLogHistory(CommandContext commandContext);
+    void Logout();
 }
