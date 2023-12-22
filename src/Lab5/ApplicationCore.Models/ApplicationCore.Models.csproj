@@ -7,7 +7,11 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\ApplicationCore.Models\ApplicationCore.Models.csproj" />
+      <PackageReference Include="Npgsql" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\ParserInfrastructure\ParserInfrastructure.csproj" />
     </ItemGroup>
 
 </Project>

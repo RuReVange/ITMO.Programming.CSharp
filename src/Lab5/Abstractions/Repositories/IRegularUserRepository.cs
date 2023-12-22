@@ -1,12 +1,12 @@
-using ApplicationCore.DomainModels;
+using ApplicationCore.Models.DomainModels;
 
 namespace Abstractions.Repositories;
 
 public interface IRegularUserRepository
 {
-    RegularUser? FindRegularUser(RegularUser regularUser);
+    RegularUser? FindRegularUser(int id, string password);
     int ShowAccountBalance(RegularUser regularUser);
-    bool WithdrawMoney(int moneyAmount, RegularUser regularUser);
-    bool RefillAccount(int moneyAmount, RegularUser regularUser);
+    int WithdrawMoney(int moneyAmount, RegularUser regularUser);
+    int RefillAccount(int moneyAmount, RegularUser regularUser);
     IList<Log> ShowLogHistory(RegularUser regularUser);
 }

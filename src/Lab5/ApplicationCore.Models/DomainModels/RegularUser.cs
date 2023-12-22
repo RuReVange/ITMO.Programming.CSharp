@@ -1,4 +1,4 @@
-namespace ApplicationCore.DomainModels;
+namespace ApplicationCore.Models.DomainModels;
 
 public record RegularUser(int Id, string Password)
 {

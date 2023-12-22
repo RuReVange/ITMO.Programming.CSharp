@@ -8,6 +8,8 @@
 
     <ItemGroup>
       <ProjectReference Include="..\ApplicationCore.Models\ApplicationCore.Models.csproj" />
+      <ProjectReference Include="..\DataBaseInfrastructure\DataBaseInfrastructure.csproj" />
+      <ProjectReference Include="..\ParserInfrastructure\ParserInfrastructure.csproj" />
     </ItemGroup>
 
 </Project>

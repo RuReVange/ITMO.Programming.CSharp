@@ -1,5 +1,5 @@
 using Abstractions.Repositories;
-using ApplicationCore.DomainModels;
+using ApplicationCore.Models.DomainModels;
 using DataBaseInfrastructure.Migrations;
 using Npgsql;
 
@@ -7,6 +7,35 @@ namespace DataBaseInfrastructure.Repositories;
 
 public class AdminUserRepository : IAdminUserRepository
 {
+    public AdminUser? FindAdminUser(string systemPassword)
+    {
+        using NpgsqlConnection connection = DataSourceConnection.Connect();
+        connection.Open();
+
+        string commandString = @"select * from AdminUsers where SystemPassword = (@systemPassword)";
+        using NpgsqlTransaction transaction = connection.BeginTransaction();
+        using var command = new NpgsqlCommand(commandString, connection);
+        command.Parameters.Add(new NpgsqlParameter("systemPassword", systemPassword));
+        NpgsqlDataReader reader = command.ExecuteReader();
+
+        if (reader.Read() is false)
+        {
+            reader.Close();
+            transaction.Commit();
+            connection.Close();
+            return null;
+        }
+        else
+        {
+            var tmpAdminUser = new AdminUser(reader.GetInt32(0), reader.GetString(1));
+            reader.Close();
+
+            transaction.Commit();
+            connection.Close();
+            return tmpAdminUser;
+        }
+    }
+
     public bool AddRegularUser(string password, AdminUser adminUser)
     {
         using NpgsqlConnection connection = DataSourceConnection.Connect();

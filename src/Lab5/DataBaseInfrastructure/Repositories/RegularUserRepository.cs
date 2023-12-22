@@ -1,5 +1,5 @@
 using Abstractions.Repositories;
-using ApplicationCore.DomainModels;
+using ApplicationCore.Models.DomainModels;
 using DataBaseInfrastructure.Migrations;
 using Npgsql;
 
@@ -7,15 +7,16 @@ namespace DataBaseInfrastructure.Repositories;
 
 public class RegularUserRepository : IRegularUserRepository
 {
-    public RegularUser? FindRegularUser(RegularUser regularUser)
+    public RegularUser? FindRegularUser(int id, string password)
     {
         using NpgsqlConnection connection = DataSourceConnection.Connect();
         connection.Open();
 
-        string commandString = @"select * from RegularUsers where id = (@UserId)";
+        string commandString = @"select * from RegularUsers where id = (@UserId) and password = (@Password)";
         using NpgsqlTransaction transaction = connection.BeginTransaction();
         using var command = new NpgsqlCommand(commandString, connection);
-        command.Parameters.Add(new NpgsqlParameter("UserId", regularUser.Id));
+        command.Parameters.Add(new NpgsqlParameter("UserId", id));
+        command.Parameters.Add(new NpgsqlParameter("Password", password));
         NpgsqlDataReader reader = command.ExecuteReader();
 
         if (reader.Read() is false)
@@ -62,7 +63,7 @@ public class RegularUserRepository : IRegularUserRepository
         return accountBalance;
     }
 
-    public bool WithdrawMoney(int moneyAmount, RegularUser regularUser)
+    public int WithdrawMoney(int moneyAmount, RegularUser regularUser)
     {
         using NpgsqlConnection connection = DataSourceConnection.Connect();
         connection.Open();
@@ -77,6 +78,11 @@ public class RegularUserRepository : IRegularUserRepository
         reader.Close();
 
         accountBalance -= moneyAmount;
+        if (accountBalance < 0)
+        {
+            return -1;
+        }
+
         commandString = @"update RegularUsers set AccountBalance = (@newAccountBalance) where id = (@UserId)";
         command.CommandText = commandString;
         command.Parameters.Add(new NpgsqlParameter("newAccountBalance", accountBalance));
@@ -92,10 +98,10 @@ public class RegularUserRepository : IRegularUserRepository
 
         transaction.Commit();
         connection.Close();
-        return true;
+        return accountBalance;
     }
 
-    public bool RefillAccount(int moneyAmount, RegularUser regularUser)
+    public int RefillAccount(int moneyAmount, RegularUser regularUser)
     {
         using NpgsqlConnection connection = DataSourceConnection.Connect();
         connection.Open();
@@ -120,12 +126,12 @@ public class RegularUserRepository : IRegularUserRepository
         command.CommandText = commandString;
         command.Parameters.Add(new NpgsqlParameter("UserId", regularUser.Id));
         command.Parameters.Add(new NpgsqlParameter("UserType", regularUser.ToString()));
-        command.Parameters.Add(new NpgsqlParameter("Message", $"RegularUser with ID:{regularUser.Id} has withdrawn money from the account"));
+        command.Parameters.Add(new NpgsqlParameter("Message", $"RegularUser with ID:{regularUser.Id} has filled up the bank account"));
         command.ExecuteNonQuery();
 
         transaction.Commit();
         connection.Close();
-        return true;
+        return accountBalance;
     }
 
     public IList<Log> ShowLogHistory(RegularUser regularUser)

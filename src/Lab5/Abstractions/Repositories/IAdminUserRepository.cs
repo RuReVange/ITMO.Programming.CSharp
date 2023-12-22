@@ -1,4 +1,4 @@
-using ApplicationCore.DomainModels;
+using ApplicationCore.Models.DomainModels;
 
 namespace Abstractions.Repositories;
 
