@@ -90,6 +90,12 @@ csharp_style_namespace_declarations = file_scoped:warning
 # Disable XML docs
 dotnet_diagnostic.CS1591.severity = none
 
+dotnet_diagnostic.CA1062.severity = none
+
 dotnet_diagnostic.CA1034.severity = none
 
-dotnet_diagnostic.CA1062.severity = none
+# Не требует делать метод статичным, если он не обращается к членам экземпляра
+dotnet_diagnostic.CA1822.severity = none
+
+#Ссылка на объект, который может быть null
+dotnet_diagnostic.CS8602.severity = none
