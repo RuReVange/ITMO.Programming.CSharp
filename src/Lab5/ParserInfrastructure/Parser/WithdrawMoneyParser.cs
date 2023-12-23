@@ -10,5 +10,6 @@ public class WithdrawMoneyParser : IParser
         var userServices = new RegularUserServices();
         int tmp = userServices.WithdrawMoney(commandContext);
         Console.WriteLine(tmp == -1 ? "Not enough money in the account" : tmp);
+        commandContext.ResultValue = tmp;
     }
 }

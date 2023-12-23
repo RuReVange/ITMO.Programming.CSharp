@@ -8,6 +8,8 @@ public class RefillAccountParser : IParser
     public void Parse(CommandContext commandContext)
     {
         var userServices = new RegularUserServices();
-        Console.WriteLine(userServices.RefillAccount(commandContext));
+        int tmp = userServices.RefillAccount(commandContext);
+        Console.WriteLine(tmp);
+        commandContext.ResultValue = tmp;
     }
 }
