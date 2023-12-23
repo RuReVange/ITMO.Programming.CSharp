@@ -8,6 +8,7 @@ public class WithdrawMoneyParser : IParser
     public void Parse(CommandContext commandContext)
     {
         var userServices = new RegularUserServices();
-        Console.WriteLine(userServices.WithdrawMoney(commandContext));
+        int tmp = userServices.WithdrawMoney(commandContext);
+        Console.WriteLine(tmp == -1 ? "Not enough money in the account" : tmp);
     }
 }

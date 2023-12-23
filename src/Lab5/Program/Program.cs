@@ -2,26 +2,32 @@
 
 using ApplicationCore.Models.DomainModels;
 using DataBaseInfrastructure.Migrations;
-using DataBaseInfrastructure.Repositories;
+using ParserInfrastructure.Parser;
 
 InitMigration.Down();
 InitMigration.Up();
 
-var adminUser = new AdminUser(1, "password");
-var adminUserRepository = new AdminUserRepository();
-adminUserRepository.AddRegularUser("zayac1", adminUser);
-adminUserRepository.ChangeSystemPassword("popabol'", adminUser);
-Console.WriteLine(adminUserRepository.ShowLogHistory(adminUser.Id)[0].Message);
+while (true)
+{
+    Console.WriteLine("Write the command, please");
+    string parsingString = Console.ReadLine();
+    if (parsingString == "exit")
+    {
+        System.Environment.Exit(0);
+    }
 
-RegularUser regularUser = adminUserRepository.FindRegularUser(1, adminUser);
-var regularUserRepository = new RegularUserRepository();
-Console.WriteLine(regularUserRepository.ShowAccountBalance(regularUser));
-regularUserRepository.RefillAccount(300, regularUser);
-Console.WriteLine(regularUserRepository.ShowAccountBalance(regularUser));
-regularUserRepository.WithdrawMoney(100, regularUser);
-Console.WriteLine(regularUserRepository.ShowAccountBalance(regularUser));
+    var commandContext = new CommandContext();
+    if (parsingString != null)
+        CommandParser.Parse(commandContext, parsingString);
+
+    IParser parser = new StartParser();
+    parser.Parse(commandContext);
+}
 
 // commands syntax:
+// For all:
+// exit
+
 // For Admin:
 // login -m admin -p "password"
 // add regular user -p "password"
@@ -36,3 +42,19 @@ Console.WriteLine(regularUserRepository.ShowAccountBalance(regularUser));
 // refill account -b "balance"
 // show log history -m user
 // logout -m user
+
+// Для проги:
+// login -m admin -p password
+// add regular user -p zayac1
+// change system password -p newPassword
+// show log history -m admin -i 1
+// logout -m admin
+// add regular user -p kit
+// login -m user -i 1 -p zayac1
+// show account balance
+// withdraw money -b 100
+// refill account -b 250
+// refill account -b 200
+// show log history -m user
+// logout -m user
+// exit

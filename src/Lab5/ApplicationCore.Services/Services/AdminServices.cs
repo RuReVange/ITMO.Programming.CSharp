@@ -16,6 +16,7 @@ public class AdminServices : IAdminServices
         _adminUser = _adminUserRepository.FindAdminUser(commandContext.FlagDictionary["-p"]);
         if (_adminUser == null)
         {
+            Console.WriteLine("The system The id or password was incorrectpassword was incorrect");
             System.Environment.Exit(0);
         }
 
